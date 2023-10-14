@@ -4,6 +4,7 @@ import { StyleSheet, Text, View } from 'react-native';
 import { createStackNavigator } from '@react-navigation/stack';
 import {NavigationContainer} from '@react-navigation/native';
 import Home from './components/Home';
+import { useFonts } from 'expo-font';
 
 export default function App() {
   return (
@@ -26,12 +27,14 @@ function MyStack() {
       },
       headerTintColor: '#fff',
       headerTitleStyle: {
-        fontWeight: 'bold',
+        fontFamily: 'FiraSansCondensed',
+        fontWeight: 'bold'
+
       },
     }}
     >
       <Stack.Screen 
-      name="Home" 
+      name="Park Pulse"
       component={Home}
        />
       {/* <Stack.Screen name="Notifications" component={Notifications} />
