@@ -1,11 +1,11 @@
-import { View, Text } from "react-native";
+import { View, Text, Image, Pressable } from "react-native";
 
 export default function Home (){
     return(
         <View>
-            <Text>
-                Home
-            </Text>
+            <Pressable>
+            <Image source={require('C:\parkpulse\assets\brookfeilds_image.png')} />
+            </Pressable>
         </View>
     )
 }

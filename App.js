@@ -34,7 +34,7 @@ function MyStack() {
     }}
     >
       <Stack.Screen 
-      name="Park Pulse"
+      name="Home"
       component={Home}
        />
       {/* <Stack.Screen name="Notifications" component={Notifications} />
