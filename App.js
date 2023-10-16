@@ -4,7 +4,7 @@ import { StyleSheet, Text, View } from 'react-native';
 import { createStackNavigator } from '@react-navigation/stack';
 import {NavigationContainer} from '@react-navigation/native';
 import Home from './components/Home';
-import { useFonts } from 'expo-font';
+import SecondPage from './components/second_page';
 
 export default function App() {
   return (
@@ -26,19 +26,15 @@ function MyStack() {
         backgroundColor: '#0C1D36',
       },
       headerTintColor: '#fff',
-      headerTitleStyle: {
-        fontFamily: 'FiraSansCondensed',
-        fontWeight: 'bold'
-
-      },
+      headerTitleStyle: {fontWeight: 'bold'},
     }}
     >
       <Stack.Screen 
       name="Home"
       component={Home}
        />
-      {/* <Stack.Screen name="Notifications" component={Notifications} />
-      <Stack.Screen name="Profile" component={Profile} />
+      <Stack.Screen name="SecondPage" component={SecondPage} />
+      {/* <Stack.Screen name="Profile" component={Profile} />
       <Stack.Screen name="Settings" component={Settings} /> */}
     </Stack.Navigator>
   );
