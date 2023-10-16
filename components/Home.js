@@ -6,45 +6,28 @@ export default function Home (){
             <TouchableOpacity>
                 <Image 
                     source={require('./image/brookfeilds_image.png')}
-                    style={{
-                        height: 130, 
-                        width: 319.36,
-                        justifyContent: 'center'
-                           }}    
+                    style={styles.img}    
+                ></Image>
+            </TouchableOpacity>
+
+            <TouchableOpacity>
+                <Image 
+                    source={require('./image/prozone_image.png')}
+                    style={styles.img}   
                 />
             </TouchableOpacity>
 
             <TouchableOpacity>
                 <Image 
                     source={require('./image/brookfeilds_image.png')}
-                    style={{
-                        height: 130, 
-                        width: 319.36,
-                        justifyContent: 'center'
-                           }}    
+                    style={styles.img}    
                 />
             </TouchableOpacity>
 
             <TouchableOpacity>
                 <Image 
                     source={require('./image/brookfeilds_image.png')}
-                    style={{
-                        height: 130, 
-                        width: 319.36,
-                        justifyContent: 'center'
-                           }}    
-                />
-            </TouchableOpacity>
-
-            <TouchableOpacity>
-                <Image 
-                    source={require('./image/brookfeilds_image.png')}
-                    style={{
-                        height: 130, 
-                        width: 319.36,
-                        justifyContent: 'center',
-                        borderRadius: 8
-                           }}    
+                    style={styles.img}    
                 />
             </TouchableOpacity>
             
@@ -55,7 +38,16 @@ export default function Home (){
 const styles = StyleSheet.create({
     container_img:    {
         flex: 1,
-        justifyContent: 'space-around',
-        alignItems: 'center'
+        alignItems: 'center',
+        paddingTop: 30
+    },
+
+    img: {
+        height: 130, 
+        width: 319.36,
+        justifyContent: 'center',
+        borderRadius: 8,
+        marginTop: 20
     }
+
     })
