@@ -13,7 +13,13 @@ export default function Home (){
             <TouchableOpacity>
                 <Image 
                     source={require('./image/prozone_image.png')}
-                    style={styles.img}   
+                    style={{
+                        height: 150, 
+                        width: 319.36,
+                        justifyContent: 'center',
+                        borderRadius: 8,
+                        marginTop: 20
+                        }}   
                 />
             </TouchableOpacity>
 
