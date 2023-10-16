@@ -4,7 +4,7 @@ import { StyleSheet, Text, View } from 'react-native';
 import { createStackNavigator } from '@react-navigation/stack';
 import {NavigationContainer} from '@react-navigation/native';
 import Home from './components/Home';
-import SecondPage from './components/second_page';
+import second_page from './components/second_page';
 
 export default function App() {
   return (
@@ -33,7 +33,7 @@ function MyStack() {
       name="Home"
       component={Home}
        />
-      <Stack.Screen name="SecondPage" component={SecondPage} />
+      <Stack.Screen name="SecondPage" component={second_page} />
       {/* <Stack.Screen name="Profile" component={Profile} />
       <Stack.Screen name="Settings" component={Settings} /> */}
     </Stack.Navigator>

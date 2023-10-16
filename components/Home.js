@@ -1,9 +1,10 @@
 import { View, Text, Image, TouchableOpacity, StyleSheet } from "react-native";
+import second_page from './second_page';
 
 export default function Home (){
     return(
         <View style = {styles.container_img}>
-            <TouchableOpacity onPress={() => this.props.navigation.navigate('SecondPage')}>
+            <TouchableOpacity onPress={() => this.props.navigation.navigate('second_page')}>
                 <Image 
                     source={require('./image/brookfeilds_image.png')}
                     style={styles.img}    
