@@ -2,6 +2,7 @@ import { View, Text, Image, TouchableOpacity, StyleSheet } from "react-native";
 import DropDownPicker from 'react-native-dropdown-picker';
 import { useState } from "react";
 
+//https://hossein-zare.github.io/react-native-dropdown-picker-website/
 export function City_dropdown ({navigation}){
     const [open, setOpen] = useState(false);
     const [value, setValue] = useState(null);
