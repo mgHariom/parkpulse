@@ -5,6 +5,7 @@ import {NavigationContainer} from '@react-navigation/native';
 import Home from './components/Home';
 import second_page from './components/second_page';
 
+
 export default function App() {
   return (
     <NavigationContainer>
@@ -22,14 +23,14 @@ function MyStack() {
     <Stack.Navigator 
     screenOptions={{
       headerStyle: {
-        backgroundColor: '#0C1D36',
+        backgroundColor: '#ffffff',
       },
-      headerTintColor: '#fff',
+      headerTintColor: '#ffffff',
       headerTitleStyle: {fontWeight: 'bold'},
     }}
     >
       <Stack.Screen 
-      name="Home"
+      name="home"
       component={Home}
        />
       <Stack.Screen name="SecondPage" component={second_page} />
