@@ -8,7 +8,11 @@ import second_page from './components/second_page';
 
 export default function App() {
   return (
-    <MyStack/>
+    <NavigationContainer>
+      <MyStack>
+
+      </MyStack>
+    </NavigationContainer>
   );
 }
 
@@ -16,11 +20,12 @@ const Stack = createStackNavigator();
 
 function MyStack() {
   return (
-      <NavigationContainer>
-        <Stack.Navigator 
-      screenOptions={{
+    <Stack.Navigator 
+    screenOptions={{
       headerStyle: {
-        backgroundColor: '#0C1D36',
+        backgroundColor: '#ffffff',
+        height: 80,
+        
       },
       headerTintColor: '#000',
       headerTitleStyle: {fontWeight: 'bold'},
@@ -34,8 +39,6 @@ function MyStack() {
       {/* <Stack.Screen name="Profile" component={Profile} />
       <Stack.Screen name="Settings" component={Settings} /> */}
     </Stack.Navigator>
-      </NavigationContainer>
-
   );
 }
 
