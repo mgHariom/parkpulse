@@ -1,6 +1,7 @@
 import { View, Text, Image, TouchableOpacity, StyleSheet } from "react-native";
 import DropDownPicker from 'react-native-dropdown-picker';
 import { useState } from "react";
+import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome';
 
 //https://hossein-zare.github.io/react-native-dropdown-picker-website/
 export function City_dropdown ({navigation}){
@@ -14,6 +15,30 @@ export function City_dropdown ({navigation}){
 
   return (
     <DropDownPicker
+
+    ArrowDownIconComponent={() => {
+
+      return (
+        <FontAwesomeIcon
+          size={15}
+          color={'#fff'}
+          style={{ paddingHorizontal: 5 }}
+          name="chevron-down"
+        />
+      );
+    }}
+    ArrowUpIconComponent={() => {
+      return (
+        <FontAwesomeIcon
+          size={15}
+          color={'#fff'}
+          style={{ paddingHorizontal: 5 }}
+          name="chevron-up"
+        />
+      );
+    }}
+
+
       open={open}
       value={value}
       items={items}
@@ -38,12 +63,11 @@ export function City_dropdown ({navigation}){
 
       placeholderStyle={{
         color: "#fff",
-        fontWeight: "bold",
-        fontSize: 23
+        fontSize: 19
       }}
 
       textStyle={{
-        fontSize: 23,
+        fontSize: 19,
         color: "#0C1D36"
       }}
 
@@ -52,10 +76,14 @@ export function City_dropdown ({navigation}){
       }}
 
       arrowIconStyle={{
-        width: 20,
-        height: 20,
+        width: 15,
+        height: 15,
         color: '#fff'
         
+      }}
+
+      onSelectItem={() => {
+        navigation.navigate('SecondPage')
       }}
       
     />
@@ -73,7 +101,7 @@ export default function Home ({navigation}){
                 ></Image>
             </TouchableOpacity>
 
-            <TouchableOpacity>
+            <TouchableOpacity onPress={() => navigation.navigate('SecondPage')}>
                 <Image 
                     source={require('./image/prozone_image.png')}
                     style={{
@@ -86,14 +114,14 @@ export default function Home ({navigation}){
                 />
             </TouchableOpacity>
 
-            <TouchableOpacity>
+            <TouchableOpacity onPress={() => navigation.navigate('SecondPage')}>
                 <Image 
                     source={require('./image/funrepublic_image.png')}
                     style={styles.img}    
                 />
             </TouchableOpacity>
 
-            <TouchableOpacity>
+            <TouchableOpacity onPress={() => navigation.navigate('SecondPage')}>
                 <Image 
                     source={require('./image/broadway_image.png')}
                     style={{
