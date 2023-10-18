@@ -1,17 +1,17 @@
-import { View, Text, Image, TouchableOpacity, StyleSheet } from "react-native";
-import second_page from './second_page';
+import { View, Text, Image, Pressable, StyleSheet} from "react-native";
+
 
 export default function Home (){
     return(
         <View style = {styles.container_img}>
-            <TouchableOpacity onPress={() => this.props.navigation.navigate('second_page')}>
+            <Pressable onPress={navigation.navigate('SecondPage')}>
                 <Image 
                     source={require('./image/brookfeilds_image.png')}
                     style={styles.img}    
                 ></Image>
-            </TouchableOpacity>
+            </Pressable>
 
-            <TouchableOpacity>
+            <Pressable>
                 <Image 
                     source={require('./image/prozone_image.png')}
                     style={{
@@ -22,21 +22,21 @@ export default function Home (){
                         marginTop: 20
                         }}   
                 />
-            </TouchableOpacity>
+            </Pressable>
 
-            <TouchableOpacity>
+            <Pressable>
                 <Image 
                     source={require('./image/brookfeilds_image.png')}
                     style={styles.img}    
                 />
-            </TouchableOpacity>
+            </Pressable>
 
-            <TouchableOpacity>
+            <Pressable>
                 <Image 
                     source={require('./image/brookfeilds_image.png')}
                     style={styles.img}    
                 />
-            </TouchableOpacity>
+            </Pressable>
             
         </View>
     )
