@@ -1,17 +1,16 @@
 import 'react-native-gesture-handler';
 import { StyleSheet, Text, View } from 'react-native';
 import { createStackNavigator } from '@react-navigation/stack';
-import {NavigationContainer} from '@react-navigation/native';
+import { NavigationContainer } from '@react-navigation/native';
 import Home from './components/Home';
 import second_page from './components/second_page';
+import ChennaiScreen from './components/ChennaiScreen';
 import ChennaiScreen from './components/ChennaiScreen';
 
 export default function App() {
   return (
     <NavigationContainer>
-      <MyStack>
-
-      </MyStack>
+      <MyStack /> {/* Render the navigation stack */}
     </NavigationContainer>
   );
 }
@@ -41,7 +40,7 @@ function MyStack() {
       component={Home}
        />
       <Stack.Screen name="SecondPage" component={second_page} />
-      < Stack.Screen name="Chennai" component={ChennaiScreen} />
+      <Stack.Screen name="Chennai" component={ChennaiScreen} />
     </Stack.Navigator>
     </View>
   );
