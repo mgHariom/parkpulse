@@ -10,28 +10,10 @@ export function City_dropdown (){
     const [value, setValue] = useState(null);
     const [items, setItems] = useState([
     {label: 'Coimbatore', value: 'Coimbatore'},  
-    {label: 'Chennai', value: 'chennai'},
-    {label: 'Banglore', value: 'banglore'}
+    {label: 'Chennai', value: 'Chennai'},
+    {label: 'Banglore', value: 'Banglore'}
   ]);
   const navigation = useNavigation();
-  const handleItemSelect = (item) => {
-    // Use the item's value to determine which screen to navigate to
-    switch (item.value) {
-      case 'Coimbatore':
-        navigation.navigate('CoimbatoreScreen');
-        break;
-      case 'Chennai':
-        navigation.navigate('ChennaiScreen');
-        console.log("pressed")
-        break;
-      case 'Banglore':
-        navigation.navigate('BangloreScreen');
-        break;
-      default:
-        // Handle the default case, if needed
-        break;
-    }
-  };
 
   return (
     <DropDownPicker
@@ -103,11 +85,25 @@ export function City_dropdown (){
       }}
      
     
-    onChangeValue={handleItemSelect}
-
-
-
+      onChangeValue={(itemValue) => {
+        switch (itemValue) {
+          case 'Coimbatore':
+            navigation.navigate('home');
+            break;
+          case 'Chennai':
+            navigation.navigate('ChennaiScreen');
+            console.log("pressed");
+            break;
+          case 'Banglore':
+            navigation.navigate('BangloreScreen');
+            break;
+          default:
+            // Handle the default case, if needed
+            break;
+        }
+      }}
       
+
     />
   );
 }
