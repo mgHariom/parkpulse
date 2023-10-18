@@ -2,10 +2,10 @@ import { View, Text, Image, TouchableOpacity, StyleSheet } from "react-native";
 import DropDownPicker from 'react-native-dropdown-picker';
 import { useState } from "react";
 import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome';
-import { useNavigation } from '@react-navigation/native';
+
 
 //https://hossein-zare.github.io/react-native-dropdown-picker-website/
-export function City_dropdown (){
+export function ChennaiScreen ({navigation}){
     const [open, setOpen] = useState(false);
     const [value, setValue] = useState(null);
     const [items, setItems] = useState([
@@ -13,7 +13,7 @@ export function City_dropdown (){
     {label: 'Chennai', value: 'chennai'},
     {label: 'Banglore', value: 'banglore'}
   ]);
-  const navigation = useNavigation();
+
   const handleItemSelect = (item) => {
     // Use the item's value to determine which screen to navigate to
     switch (item.value) {
@@ -103,7 +103,7 @@ export function City_dropdown (){
       }}
      
     
-    onChangeValue={handleItemSelect}
+    onChangeItem={handleItemSelect}
 
 
 
