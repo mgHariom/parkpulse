@@ -4,7 +4,7 @@ import { useState } from "react";
 import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome';
 
 //https://hossein-zare.github.io/react-native-dropdown-picker-website/
-export function City_dropdown ({navigation}){
+export function City_dropdown (){
     const [open, setOpen] = useState(false);
     const [value, setValue] = useState(null);
     const [items, setItems] = useState([
@@ -81,10 +81,6 @@ export function City_dropdown ({navigation}){
         color: '#fff'
         
       }}
-
-      onSelectItem={() => {
-        navigation.navigate('SecondPage')
-      }}
       
     />
   );
@@ -112,7 +108,7 @@ export default function Home ({navigation}){
                         marginTop: 20
                         }}   
                 />
-            </TouchableOpacity>
+            </TouchableOpacity> 
 
             <TouchableOpacity onPress={() => navigation.navigate('SecondPage')}>
                 <Image 

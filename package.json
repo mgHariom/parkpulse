@@ -14,6 +14,8 @@
     "expo": "~49.0.13",
     "expo-splash-screen": "~0.20.5",
     "expo-status-bar": "~1.6.0",
+    "font-awesome": "^4.7.0",
+    "navigate": "^0.3.6",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-native": "0.72.5",

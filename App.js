@@ -32,7 +32,7 @@ function MyStack() {
     }}
     >
       <Stack.Screen 
-      name="home"
+      name='home'
       component={Home}
        />
       <Stack.Screen name="SecondPage" component={second_page} />
