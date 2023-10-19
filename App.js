@@ -5,7 +5,6 @@ import { NavigationContainer } from '@react-navigation/native';
 import Home from './components/Home';
 import second_page from './components/second_page';
 import ChennaiScreen from './components/ChennaiScreen';
-import ChennaiScreen from './components/ChennaiScreen';
 
 export default function App() {
   return (
@@ -29,7 +28,6 @@ function MyStack() {
         
       },
 
-      headerShown: false ,
       headerTintColor: '#000',
       headerTitleStyle: {fontWeight: 'bold'},
       
@@ -40,7 +38,7 @@ function MyStack() {
       component={Home}
        />
       <Stack.Screen name="SecondPage" component={second_page} />
-      <Stack.Screen name="Chennai" component={ChennaiScreen} />
+      <Stack.Screen name="ChennaiScreen" component={ChennaiScreen} />
     </Stack.Navigator>
     </View>
   );

@@ -13,7 +13,7 @@ export function City_dropdown (){
     {label: 'Chennai', value: 'Chennai'},
     {label: 'Banglore', value: 'Banglore'}
   ]);
-  const navigation = useNavigation();
+  // const navigation = useNavigation();
 
   return (
     <DropDownPicker
