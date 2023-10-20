@@ -1,117 +1,122 @@
 import { View, Text, Image, TouchableOpacity, StyleSheet } from "react-native";
 import DropDownPicker from 'react-native-dropdown-picker';
 import { useState } from "react";
-import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome';
-import { useNavigation } from '@react-navigation/native';
+import { Dropdown } from 'react-native-element-dropdown';
+import AntDesign from '@expo/vector-icons/AntDesign';
 
 //https://hossein-zare.github.io/react-native-dropdown-picker-website/
-export function City_dropdown (){
-    const [open, setOpen] = useState(false);
-    const [value, setValue] = useState(null);
-    const [items, setItems] = useState([
-    {label: 'Coimbatore', value: 'Coimbatore'},  
-    {label: 'Chennai', value: 'Chennai'},
-    {label: 'Banglore', value: 'Banglore'}
-  ]);
-  const navigation = useNavigation();
+// export function City_dropdown ({navigation}){
+//     const [open, setOpen] = useState(false);
+//     const [value, setValue] = useState(null);
+//     const [items, setItems] = useState([
+//     {label: 'Coimbatore', value: 'Coimbatore'},  
+//     {label: 'Chennai', value: 'chennai'},
+//     {label: 'Banglore', value: 'banglore'}
+//   ]);
 
-  return (
-    <DropDownPicker
-
-    ArrowDownIconComponent={() => {
-
-      return (
-        <FontAwesomeIcon
-          size={15}
-          color={'#fff'}
-          style={{ paddingHorizontal: 5 }}
-          name="chevron-down"
-        />
-      );
-    }}
-    ArrowUpIconComponent={() => {
-      return (
-        <FontAwesomeIcon
-          size={15}
-          color={'#fff'}
-          style={{ paddingHorizontal: 5 }}
-          name="chevron-up"
-        />
-      );
-    }}
-
-
-      open={open}
-      value={value}
-      items={items}
-      setOpen={setOpen}
-      setValue={setValue}
-      setItems={setItems}
+//   return (
+//     <DropDownPicker
+//       open={open}
+//       value={value}
+//       items={items}
+//       setOpen={setOpen}
+//       setValue={setValue}
+//       setItems={setItems}
       
-      containerStyle={{
-             width: 310,
-             color: '#fff',
-             zIndex: 3
-      }}
+//       containerStyle={{
+//              width: 310,
+//              color: '#fff',
+//              zIndex: 3
+//       }}
 
-      style={{
-        borderColor: '#fff',
-        backgroundColor: '#0C1D36'
-      }}
+//       style={{
+//         borderColor: '#fff',
+//         backgroundColor: '#0C1D36'
+//       }}
 
-      translation={{
-        PLACEHOLDER: "Coimbatore"
-      }}
+//       translation={{
+//         PLACEHOLDER: "Coimbatore"
+//       }}
 
-      placeholderStyle={{
-        color: "#fff",
-        fontSize: 19
-      }}
+//       placeholderStyle={{
+//         color: "#fff",
+//         fontWeight: "bold",
+//         fontSize: 23
+//       }}
 
-      textStyle={{
-        fontSize: 19,
-        color: "#0C1D36"
-      }}
+//       textStyle={{
+//         fontSize: 23,
+//         color: "#0C1D36"
+//       }}
 
-      labelStyle={{
-        color: '#fff'
-      }}
+//       labelStyle={{
+//         color: '#fff'
+//       }}
 
-      arrowIconStyle={{
-        width: 15,
-        height: 15,
-        color: '#fff'
+//       arrowIconStyle={{
+//         width: 20,
+//         height: 20,
+//         color: '#fff'
         
-      }}
-     
-    
-      onChangeValue={(itemValue) => {
-        switch (itemValue) {
-          case 'Coimbatore':
-            navigation.navigate('home');
-            break;
-          case 'Chennai':
-            navigation.navigate('ChennaiScreen');
-            console.log("pressed");
-            break;
-          case 'Banglore':
-            navigation.navigate('BangloreScreen');
-            break;
-          default:
-            // Handle the default case, if needed
-            break;
-        }
-      }}
+//       }}
       
-
-    />
-  );
-}
+//     />
+//   );
+// }
 
 export default function Home ({navigation}){
+
+  const data = [
+    { label: 'coimbatore', value: 'Coimbatore' },
+    { label: 'chennai', value: 'Chennai' },
+    { label: 'banglore', value: 'Banglore' },
+  ];
+
+  const [value, setValue] = useState(null);
+    const [isFocus, setIsFocus] = useState(false);
+
+    const renderLabel = () => {
+      if (value || isFocus) {
+        return (
+          <Text style={[styles.label, isFocus && { color: 'blue' }]}>
+            Dropdown label
+          </Text>
+        );
+      }
+      return null;
+    };
     return(
         <View style = {styles.container_img}>
-            <City_dropdown/>
+            {/* <City_dropdown/> */}
+            <Dropdown
+          style={[styles.dropdown, isFocus && { borderColor: 'blue' }]}
+          placeholderStyle={styles.placeholderStyle}
+          selectedTextStyle={styles.selectedTextStyle}
+          //inputSearchStyle={styles.inputSearchStyle}
+          iconStyle={styles.iconStyle}
+          data={data}
+          //search
+          maxHeight={300}
+          labelField="label"
+          valueField="value"
+          placeholder={!isFocus ? 'Select city' : ''}
+          //searchPlaceholder="Search..."
+          value={value}
+          onFocus={() => setIsFocus(true)}
+          onBlur={() => setIsFocus(false)}
+          onChange={item => {
+            setValue(item.value);
+            setIsFocus(false);
+          }}
+          // renderLeftIcon={() => (
+          //   <AntDesign
+          //     style={styles.icon}
+          //     color={isFocus ? 'blue' : 'black'}
+          //     name="EnvironmentTwoTone"
+          //     size={20}
+          //   />
+          // )}
+        />
             <TouchableOpacity onPress={() => navigation.navigate('SecondPage')}>
                 <Image 
                     source={require('./image/brookfields_image.png')}
@@ -119,7 +124,7 @@ export default function Home ({navigation}){
                 ></Image>
             </TouchableOpacity>
 
-            <TouchableOpacity onPress={() => navigation.navigate('SecondPage')}>
+            <TouchableOpacity>
                 <Image 
                     source={require('./image/prozone_image.png')}
                     style={{
@@ -130,16 +135,16 @@ export default function Home ({navigation}){
                         marginTop: 20
                         }}   
                 />
-            </TouchableOpacity> 
+            </TouchableOpacity>
 
-            <TouchableOpacity onPress={() => navigation.navigate('SecondPage')}>
+            <TouchableOpacity>
                 <Image 
                     source={require('./image/funrepublic_image.png')}
                     style={styles.img}    
                 />
             </TouchableOpacity>
 
-            <TouchableOpacity onPress={() => navigation.navigate('SecondPage')}>
+            <TouchableOpacity>
                 <Image 
                     source={require('./image/broadway_image.png')}
                     style={{
@@ -170,6 +175,43 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         borderRadius: 8,
         marginTop: 20
-    }
+    },
+
+    dropdown: {
+      width: 319.36,
+      height: 40,
+      backgroundColor:'#d8f4fh',
+      borderColor: 'gray',
+      borderWidth: 0.5,
+      borderRadius: 8,
+      paddingHorizontal: 8,
+    },
+    icon: {
+      marginRight: 5,
+    },
+    label: {
+      position: 'absolute',
+      //width: 300,
+      backgroundColor: '#d8f4fh',
+      left: 22,
+      top: 8,
+      zIndex: 999,
+      paddingHorizontal: 8,
+      fontSize: 14,
+    },
+    placeholderStyle: {
+      fontSize: 16,
+    },
+    selectedTextStyle: {
+      fontSize: 16,
+    },
+    iconStyle: {
+      width: 20,
+      height: 20,
+    },
+    inputSearchStyle: {
+      height: 40,
+      fontSize: 16,
+    },
 
     })
