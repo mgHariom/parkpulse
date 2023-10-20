@@ -86,7 +86,7 @@ import { Dropdown } from "react-native-element-dropdown";
 //   );
 // }
 
-export default function Home ({navigation, route}){
+export default function Chennai ({navigation, route}){
   const data = [
     { label: 'Coimbatore', value: 'Coimbatore' },
     { label: 'Chennai', value: 'Chennai' },
@@ -96,7 +96,7 @@ export default function Home ({navigation, route}){
   const [value, setValue] = useState(null);
   const [isFocus, setIsFocus] = useState(false);
 
-  const renderLabel = () => {
+    const renderLabel = () => {
       if (value || isFocus) {
         return (
           <Text style={[styles.label, isFocus && { color: 'blue' }]}>
@@ -107,11 +107,11 @@ export default function Home ({navigation, route}){
       return null;
     };
 
-  const resetDropdownValue = (newValue) => {
+    const resetDropdownValue = (newValue) => {
         setValue(newValue);
       };
 
-      useEffect(() => {
+    useEffect(() => {
         const unsubscribe = navigation.addListener('focus', () => {
           // Reset the dropdown value based on the screen being navigated to
           switch (route.name) {
@@ -138,7 +138,7 @@ export default function Home ({navigation, route}){
             {/* <City_dropdown/> */}
             <Dropdown
           style={[styles.dropdown, isFocus && { borderColor: 'blue' }]}
-          placeholder={!isFocus ? 'Select a city' : ''}
+          placeholder={!isFocus ? 'Chennai' : ''}
           placeholderStyle={styles.placeholderStyle}
           selectedTextStyle={styles.selectedTextStyle}
           //inputSearchStyle={styles.inputSearchStyle}
@@ -146,7 +146,6 @@ export default function Home ({navigation, route}){
           data={data}
           //search
           maxHeight={300}
-          
           labelField="label"
           valueField="value"
           //searchPlaceholder="Search..."
@@ -155,24 +154,27 @@ export default function Home ({navigation, route}){
           onBlur={() => setIsFocus(false)}
           onChange={item => {
             setValue(item.value);
-            setIsFocus(true);
+            setIsFocus(false);
             navigation.navigate(item.value);
 
-        //     switch (item.value) {
-        //       case 'Coimbatore':
-        //         navigation.navigate('Coimbatore');
-        //         break;
-        //       case 'Chennai':
-        //         navigation.navigate('Chennai');
-        //         break;
-        //       case 'Banglore':
-        //         navigation.navigate('Banglore');
-        //         break;
-        //       default:
-        //         // Handle the default case, if needed
-        //         break;
-        //     }
-           }}
+            // switch (item.value) {
+            //     case 'Coimbatore':
+            //       navigation.navigate('Coimbatore');
+            //       setValue(item.value)
+            //       break;
+            //     case 'Chennai':
+            //       navigation.navigate('Chennai');
+            //       setValue(item.value)
+            //       break;
+            //     case 'Banglore':
+            //       navigation.navigate('Banglore');
+            //       setValue(item.value)
+            //       break;
+            //       default:
+            //     // Handle the default case, if needed
+            //     break;
+            //   }
+          }}
           // renderLeftIcon={() => (
           //   <AntDesign
           //     style={styles.icon}
@@ -184,43 +186,25 @@ export default function Home ({navigation, route}){
         />
             <TouchableOpacity onPress={() => navigation.navigate('SecondPage')}>
                 <Image 
-                    source={require('./image/coimbatore/brookfields_image.png')}
+                    source={require('./image/chennai/expressavenue_image.png')}
                     style={styles.img}    
                 ></Image>
             </TouchableOpacity>
 
             <TouchableOpacity onPress={() => navigation.navigate('SecondPage')}>
                 <Image 
-                    source={require('./image/coimbatore/prozone_image.png')}
-                    style={{
-                        height: 150, 
-                        width: 319.36,
-                        justifyContent: 'center',
-                        borderRadius: 8,
-                        marginTop: 20
-                        }}   
+                    source={require('./image/chennai/nexus_image.png')}
+                    style={styles.img}  
                 />
             </TouchableOpacity> 
 
             <TouchableOpacity onPress={() => navigation.navigate('SecondPage')}>
                 <Image 
-                    source={require('./image/coimbatore/funrepublic_image.png')}
+                    source={require('./image/chennai/phoenix_image.png')}
                     style={styles.img}    
                 />
             </TouchableOpacity>
 
-            <TouchableOpacity onPress={() => navigation.navigate('SecondPage')}>
-                <Image 
-                    source={require('./image/coimbatore/broadway_image.png')}
-                    style={{
-                        height: 140, 
-                        width: 319.36,
-                        justifyContent: 'center',
-                        borderRadius: 8,
-                        marginTop: 20
-                        }}    
-                />
-            </TouchableOpacity>
             
         </View>
     )

@@ -86,7 +86,7 @@ import { Dropdown } from "react-native-element-dropdown";
 //   );
 // }
 
-export default function Home ({navigation, route}){
+export default function Coimbatore ({navigation, route}){
   const data = [
     { label: 'Coimbatore', value: 'Coimbatore' },
     { label: 'Chennai', value: 'Chennai' },
@@ -96,7 +96,7 @@ export default function Home ({navigation, route}){
   const [value, setValue] = useState(null);
   const [isFocus, setIsFocus] = useState(false);
 
-  const renderLabel = () => {
+    const renderLabel = () => {
       if (value || isFocus) {
         return (
           <Text style={[styles.label, isFocus && { color: 'blue' }]}>
@@ -107,38 +107,38 @@ export default function Home ({navigation, route}){
       return null;
     };
 
-  const resetDropdownValue = (newValue) => {
-        setValue(newValue);
-      };
+    const resetDropdownValue = (newValue) => {
+      setValue(newValue);
+    };
 
-      useEffect(() => {
-        const unsubscribe = navigation.addListener('focus', () => {
-          // Reset the dropdown value based on the screen being navigated to
-          switch (route.name) {
-            case 'Coimbatore':
-              resetDropdownValue('Coimbatore');
-              break;
-            case 'Chennai':
-              resetDropdownValue('Chennai');
-              break;
-            case 'Banglore':
-              resetDropdownValue('Banglore');
-              break;
-            default:
-              resetDropdownValue(null);
-              break;
-          }
-        });
-    
-        return unsubscribe;
-      }, [navigation, route.name]);
+    useEffect(() => {
+      const unsubscribe = navigation.addListener('focus', () => {
+        // Reset the dropdown value based on the screen being navigated to
+        switch (route.name) {
+          case 'Coimbatore':
+            resetDropdownValue('Coimbatore');
+            break;
+          case 'Chennai':
+            resetDropdownValue('Chennai');
+            break;
+          case 'Banglore':
+            resetDropdownValue('Banglore');
+            break;
+          default:
+            resetDropdownValue(null);
+            break;
+        }
+      });
+  
+      return unsubscribe;
+    }, [navigation, route.name]);
     
     return(
         <View style = {styles.container_img}>
             {/* <City_dropdown/> */}
             <Dropdown
           style={[styles.dropdown, isFocus && { borderColor: 'blue' }]}
-          placeholder={!isFocus ? 'Select a city' : ''}
+          placeholder={!isFocus ? 'Coimbatore' : ''}
           placeholderStyle={styles.placeholderStyle}
           selectedTextStyle={styles.selectedTextStyle}
           //inputSearchStyle={styles.inputSearchStyle}
@@ -146,33 +146,35 @@ export default function Home ({navigation, route}){
           data={data}
           //search
           maxHeight={300}
-          
           labelField="label"
           valueField="value"
-          //searchPlaceholder="Search..."
+          // searchPlaceholder="Search..."
           value={value}
           onFocus={() => setIsFocus(true)}
           onBlur={() => setIsFocus(false)}
           onChange={item => {
             setValue(item.value);
-            setIsFocus(true);
+            setIsFocus(false);
             navigation.navigate(item.value);
 
-        //     switch (item.value) {
-        //       case 'Coimbatore':
-        //         navigation.navigate('Coimbatore');
-        //         break;
-        //       case 'Chennai':
-        //         navigation.navigate('Chennai');
-        //         break;
-        //       case 'Banglore':
-        //         navigation.navigate('Banglore');
-        //         break;
-        //       default:
-        //         // Handle the default case, if needed
-        //         break;
-        //     }
-           }}
+            // switch (item.value) {
+            //   case 'Coimbatore':
+            //     navigation.navigate('Coimbatore');
+            //     setValue(item.value)
+            //     break;
+            //   case 'Chennai':
+            //     navigation.navigate('Chennai');
+            //     setValue(item.value)
+            //     break;
+            //   case 'Banglore':
+            //     navigation.navigate('Banglore');
+            //     setValue(item.value)
+            //     break;
+            //     default:
+            //     // Handle the default case, if needed
+            //     break;
+            // }
+          }}
           // renderLeftIcon={() => (
           //   <AntDesign
           //     style={styles.icon}
