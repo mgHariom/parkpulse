@@ -1,11 +1,10 @@
 import { View, Text, Image, TouchableOpacity, StyleSheet } from "react-native";
 import DropDownPicker from 'react-native-dropdown-picker';
 import { useState } from "react";
-import { Dropdown } from 'react-native-element-dropdown';
-import AntDesign from '@expo/vector-icons/AntDesign';
-
+import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome';
+import { Dropdown } from "react-native-element-dropdown";
 //https://hossein-zare.github.io/react-native-dropdown-picker-website/
-// export function City_dropdown ({navigation}){
+// export function City_dropdown (){
 //     const [open, setOpen] = useState(false);
 //     const [value, setValue] = useState(null);
 //     const [items, setItems] = useState([
@@ -16,6 +15,30 @@ import AntDesign from '@expo/vector-icons/AntDesign';
 
 //   return (
 //     <DropDownPicker
+
+//     ArrowDownIconComponent={() => {
+
+//       return (
+//         <FontAwesomeIcon
+//           size={15}
+//           color={'#fff'}
+//           style={{ paddingHorizontal: 5 }}
+//           name="chevron-down"
+//         />
+//       );
+//     }}
+//     ArrowUpIconComponent={() => {
+//       return (
+//         <FontAwesomeIcon
+//           size={15}
+//           color={'#fff'}
+//           style={{ paddingHorizontal: 5 }}
+//           name="chevron-up"
+//         />
+//       );
+//     }}
+
+
 //       open={open}
 //       value={value}
 //       items={items}
@@ -40,12 +63,11 @@ import AntDesign from '@expo/vector-icons/AntDesign';
 
 //       placeholderStyle={{
 //         color: "#fff",
-//         fontWeight: "bold",
-//         fontSize: 23
+//         fontSize: 19
 //       }}
 
 //       textStyle={{
-//         fontSize: 23,
+//         fontSize: 19,
 //         color: "#0C1D36"
 //       }}
 
@@ -54,8 +76,8 @@ import AntDesign from '@expo/vector-icons/AntDesign';
 //       }}
 
 //       arrowIconStyle={{
-//         width: 20,
-//         height: 20,
+//         width: 15,
+//         height: 15,
 //         color: '#fff'
         
 //       }}
@@ -65,7 +87,6 @@ import AntDesign from '@expo/vector-icons/AntDesign';
 // }
 
 export default function Home ({navigation}){
-
   const data = [
     { label: 'coimbatore', value: 'Coimbatore' },
     { label: 'chennai', value: 'Chennai' },
@@ -85,7 +106,8 @@ export default function Home ({navigation}){
       }
       return null;
     };
-    return(
+    
+                   return(
         <View style = {styles.container_img}>
             {/* <City_dropdown/> */}
             <Dropdown
@@ -124,7 +146,7 @@ export default function Home ({navigation}){
                 ></Image>
             </TouchableOpacity>
 
-            <TouchableOpacity>
+            <TouchableOpacity onPress={() => navigation.navigate('SecondPage')}>
                 <Image 
                     source={require('./image/prozone_image.png')}
                     style={{
@@ -135,16 +157,16 @@ export default function Home ({navigation}){
                         marginTop: 20
                         }}   
                 />
-            </TouchableOpacity>
+            </TouchableOpacity> 
 
-            <TouchableOpacity>
+            <TouchableOpacity onPress={() => navigation.navigate('SecondPage')}>
                 <Image 
                     source={require('./image/funrepublic_image.png')}
                     style={styles.img}    
                 />
             </TouchableOpacity>
 
-            <TouchableOpacity>
+            <TouchableOpacity onPress={() => navigation.navigate('SecondPage')}>
                 <Image 
                     source={require('./image/broadway_image.png')}
                     style={{
@@ -175,43 +197,6 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         borderRadius: 8,
         marginTop: 20
-    },
+    }
 
-    dropdown: {
-      width: 319.36,
-      height: 40,
-      backgroundColor:'#d8f4fh',
-      borderColor: 'gray',
-      borderWidth: 0.5,
-      borderRadius: 8,
-      paddingHorizontal: 8,
-    },
-    icon: {
-      marginRight: 5,
-    },
-    label: {
-      position: 'absolute',
-      //width: 300,
-      backgroundColor: '#d8f4fh',
-      left: 22,
-      top: 8,
-      zIndex: 999,
-      paddingHorizontal: 8,
-      fontSize: 14,
-    },
-    placeholderStyle: {
-      fontSize: 16,
-    },
-    selectedTextStyle: {
-      fontSize: 16,
-    },
-    iconStyle: {
-      width: 20,
-      height: 20,
-    },
-    inputSearchStyle: {
-      height: 40,
-      fontSize: 16,
-    },
-
-    })
+    })
