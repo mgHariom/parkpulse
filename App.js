@@ -4,7 +4,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { NavigationContainer } from '@react-navigation/native';
 import Home from './components/Home';
 import second_page from './components/second_page';
-import ChennaiScreen from './components/ChennaiScreen';
+
 
 export default function App() {
   return (
@@ -38,7 +38,6 @@ function MyStack() {
       component={Home}
        />
       <Stack.Screen name="SecondPage" component={second_page} />
-      <Stack.Screen name="ChennaiScreen" component={ChennaiScreen} />
     </Stack.Navigator>
     </View>
   );
