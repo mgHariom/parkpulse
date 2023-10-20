@@ -5,7 +5,6 @@ import { NavigationContainer } from '@react-navigation/native';
 import Home from './components/Home';
 import second_page from './components/second_page';
 import ChennaiScreen from './components/ChennaiScreen';
-import ChennaiScreen from './components/ChennaiScreen';
 
 export default function App() {
   return (
