@@ -182,16 +182,16 @@ export default function Home ({navigation, route}){
           //   />
           // )}
         />
-            <TouchableOpacity onPress={() => navigation.navigate('SecondPage')}>
+            <TouchableOpacity onPress={() => navigation.navigate('SecondPage',  { name: 'Brookefields' })}>
                 <Image 
                     source={require('./image/coimbatore/brookfields_image.png')}
                     style={styles.img}    
                 ></Image>
             </TouchableOpacity>
 
-            <TouchableOpacity onPress={() => navigation.navigate('SecondPage')}>
+            <TouchableOpacity onPress={() => navigation.navigate('SecondPage', { name: 'Phoenix' })}>
                 <Image 
-                    source={require('./image/coimbatore/prozone_image.png')}
+                    source={require('./image/chennai/phoenix_image.png')}
                     style={{
                         height: 150, 
                         width: 319.36,
@@ -202,16 +202,16 @@ export default function Home ({navigation, route}){
                 />
             </TouchableOpacity> 
 
-            <TouchableOpacity onPress={() => navigation.navigate('SecondPage')}>
+            <TouchableOpacity onPress={() => navigation.navigate('SecondPage', { name: 'Orion' })}>
                 <Image 
-                    source={require('./image/coimbatore/funrepublic_image.png')}
+                    source={require('./image/banglore/orion_image.png')}
                     style={styles.img}    
                 />
             </TouchableOpacity>
 
-            <TouchableOpacity onPress={() => navigation.navigate('SecondPage')}>
+            <TouchableOpacity onPress={() => navigation.navigate('SecondPage', { name: 'Nexus' })}>
                 <Image 
-                    source={require('./image/coimbatore/broadway_image.png')}
+                    source={require('./image/chennai/nexus_image.png')}
                     style={{
                         height: 140, 
                         width: 319.36,

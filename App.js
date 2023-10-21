@@ -7,6 +7,7 @@ import second_page from './components/second_page';
 import Chennai from './components/Chennai';
 import Banglore from './components/Banglore';
 import Home from './components/Home';
+import Calendar from './components/Calendar';
 
 
 export default function App() {
@@ -31,7 +32,10 @@ function MyStack() {
         
       },
       headerTintColor: '#000',
-      headerTitleStyle: {fontWeight: 'bold'},
+      headerTitleStyle: {
+        fontWeight: 'bold',
+        color: '#d8f0fa'
+      },
     }}
     >
       <Stack.Screen name="Home" component={Home}/>
