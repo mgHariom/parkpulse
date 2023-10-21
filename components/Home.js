@@ -230,7 +230,7 @@ const styles = StyleSheet.create({
     container_img:    {
         flex: 1,
         alignItems: 'center',
-        paddingTop: 30,
+        paddingTop: 0,
         backgroundColor: '#d8f0fa'
     },
 
