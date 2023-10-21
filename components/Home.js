@@ -8,7 +8,7 @@ export default function Home ({navigation, route}){
   const data = [
     { label: 'Coimbatore', value: 'Coimbatore' },
     { label: 'Chennai', value: 'Chennai' },
-    { label: 'Banglore', value: 'Banglore' },
+    { label: 'Bangalore', value: 'Bangalore' },
   ];
 
   const [value, setValue] = useState(null);
@@ -39,8 +39,8 @@ export default function Home ({navigation, route}){
             case 'Chennai':
               resetDropdownValue('Chennai');
               break;
-            case 'Banglore':
-              resetDropdownValue('Banglore');
+            case 'Bangalore':
+              resetDropdownValue('Bangalore');
               break;
             default:
               resetDropdownValue(null);
@@ -52,7 +52,7 @@ export default function Home ({navigation, route}){
       }, [navigation, route.name]);
     
     return(
-        <ScrollView>
+        <ScrollView style = {styles.scrollView}>
           <View style = {styles.container_img}>
             <Dropdown
           style={[styles.dropdown, isFocus && { borderColor: 'blue' }]}
@@ -95,7 +95,7 @@ export default function Home ({navigation, route}){
 
             <TouchableOpacity onPress={() => navigation.navigate('SecondPage', { name: 'Orion' })}>
                 <Image 
-                    source={require('./image/banglore/orion_image.png')}
+                    source={require('./image/bangalore/orion_image.png')}
                     style={styles.img}    
                 />
             </TouchableOpacity>
@@ -124,6 +124,10 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         paddingTop: 0,
         backgroundColor: '#d8f0fa'
+    },
+
+    scrollView: {
+      backgroundColor: '#d8f0fa',
     },
 
     img: {

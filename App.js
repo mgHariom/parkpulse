@@ -5,9 +5,9 @@ import {NavigationContainer} from '@react-navigation/native';
 import Coimbatore from './components/Coimbatore';
 import second_page from './components/second_page';
 import Chennai from './components/Chennai';
-import Banglore from './components/Banglore';
+import Bangalore from './components/Bangalore';
 import Home from './components/Home';
-import Calendar from './components/Calendar';
+import TimeToggle from './components/TimeToggle';
 
 
 export default function App() {
@@ -41,8 +41,9 @@ function MyStack() {
       <Stack.Screen name="Home" component={Home}/>
       <Stack.Screen name="Coimbatore" component={Coimbatore}/>
       <Stack.Screen name="Chennai" component={Chennai} />
-      <Stack.Screen name="Banglore" component={Banglore} />
+      <Stack.Screen name="Bangalore" component={Bangalore} />
       <Stack.Screen name="SecondPage" component={second_page} />
+      <Stack.Screen name="TimeToggle" component={TimeToggle} />
     </Stack.Navigator>
   );
 }

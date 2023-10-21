@@ -8,7 +8,7 @@ export default function Coimbatore ({navigation, route}){
   const data = [
     { label: 'Coimbatore', value: 'Coimbatore' },
     { label: 'Chennai', value: 'Chennai' },
-    { label: 'Banglore', value: 'Banglore' },
+    { label: 'Bangalore', value: 'Bangalore' },
   ];
 
   const [value, setValue] = useState(null);
@@ -28,8 +28,8 @@ export default function Coimbatore ({navigation, route}){
           case 'Chennai':
             resetDropdownValue('Chennai');
             break;
-          case 'Banglore':
-            resetDropdownValue('Banglore');
+          case 'Bangalore':
+            resetDropdownValue('Bangalore');
             break;
           default:
             resetDropdownValue(null);
@@ -41,7 +41,7 @@ export default function Coimbatore ({navigation, route}){
     }, [navigation, route.name]);
     
     return(
-        <ScrollView>
+        <ScrollView style = {styles.scrollView}>
           <View style = {styles.container_img}>
             <Dropdown
               style={[styles.dropdown, isFocus && { borderColor: 'blue' }]}
@@ -113,6 +113,10 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         paddingTop: 0,
         backgroundColor: '#d8f0fa'
+    },
+
+    scrollView: {
+      backgroundColor: '#d8f0fa',
     },
 
     img: {

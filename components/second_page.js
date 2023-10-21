@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet, ScrollView } from "react-native";
+import { View, Text, StyleSheet, ScrollView, Pressable } from "react-native";
 import Calendar from "./Calendar";
 
 export default function SecondPage ({ route, navigation }) {
@@ -16,6 +16,13 @@ export default function SecondPage ({ route, navigation }) {
         <View>
           <Calendar/>
         </View>
+      </View>
+      <View>
+      <Pressable onPress={() => navigation.navigate('TimeToggle')}>
+              <Text>
+                TimeToggle
+              </Text>
+      </Pressable>
       </View>
     </ScrollView>
   )
