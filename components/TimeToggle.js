@@ -1,73 +1,90 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, ScrollView, Button, FlatList} from 'react-native';
-import Checkbox from 'expo-checkbox';
+import { View, Text, TouchableOpacity, FlatList, StyleSheet } from 'react-native';
 
-
-export default function ShoppingCart({ navigation }) {
+const CartScreen = () => {
   const [cartItems, setCartItems] = useState([
-    { id: 1, name: 'Product 1', price: 10, selected: false },
-    { id: 2, name: 'Product 2', price: 15, selected: false },
-    { id: 3, name: 'Product 3', price: 20, selected: false },
+    { id: 1, name: 'Item 1', price: 10, quantity: 1 },
+    { id: 2, name: 'Item 2', price: 15, quantity: 2 },
+    { id: 3, name: 'Item 3', price: 20, quantity: 3 },
   ]);
 
-  const toggleItemSelection = (itemId) => {
-    const updatedCartItems = cartItems.map(item => {
-      if (item.id === itemId) {
-        return { ...item, selected: !item.selected };
+  const onIncrement = (item) => {
+    const updatedCart = cartItems.map((cartItem) => {
+      if (cartItem.id === item.id) {
+        return { ...cartItem, quantity: cartItem.quantity + 1 };
       }
-      return item;
+      return cartItem;
     });
-    setCartItems(updatedCartItems);
+    setCartItems(updatedCart);
   };
 
-  const removeSelectedItems = () => {
-    const updatedCartItems = cartItems.filter(item => !item.selected);
-    setCartItems(updatedCartItems);
+  const onDecrement = (item) => {
+    const updatedCart = cartItems.map((cartItem) => {
+      if (cartItem.id === item.id && cartItem.quantity > 1) {
+        return { ...cartItem, quantity: cartItem.quantity - 1 };
+      }
+      return cartItem;
+    });
+    setCartItems(updatedCart);
   };
+
+  const renderItem = ({ item }) => (
+    <CartItem item={item} onIncrement={onIncrement} onDecrement={onDecrement} />
+  );
 
   return (
-    <ScrollView style={styles.scrollView}>
-      <View style={styles.container}>
-        <FlatList
-          data={cartItems}
-          keyExtractor={item => item.id.toString()}
-          renderItem={({ item }) => (
-            <View style={styles.cartItem}>
-              <Text style={styles.itemName}>{item.name}</Text>
-              <Text style={styles.itemPrice}>${item.price}</Text>
-              <Checkbox
-                value={item.selected}
-                onValueChange={() => toggleItemSelection(item.id)}
-              />
-            </View>
-          )}
-        />
-        <Button title="Remove Selected Items" onPress={removeSelectedItems} />
-      </View>
-    </ScrollView>
+    <View style={styles.container}>
+      <FlatList
+        data={cartItems}
+        renderItem={renderItem}
+        keyExtractor={(item) => item.id.toString()}
+      />
+    </View>
   );
-}
+};
+
+const CartItem = ({ item, onIncrement, onDecrement }) => {
+  return (
+    <View style={styles.cartItem}>
+      <Text>{item.name}</Text>
+      <Text>${item.price}</Text>
+      <View style={styles.quantityContainer}>
+        <TouchableOpacity onPress={() => onDecrement(item)}>
+          <Text style={styles.quantityButton}>-</Text>
+        </TouchableOpacity>
+        <Text style={styles.quantity}>{item.quantity}</Text>
+        <TouchableOpacity onPress={() => onIncrement(item)}>
+          <Text style={styles.quantityButton}>+</Text>
+        </TouchableOpacity>
+      </View>
+    </View>
+  );
+};
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#d8f0fa',
-  },
-  scrollView: {
-    backgroundColor: '#d8f0fa',
+    padding: 10,
   },
   cartItem: {
     flexDirection: 'row',
-    alignItems: 'center',
     justifyContent: 'space-between',
+    alignItems: 'center',
     padding: 10,
     borderBottomWidth: 1,
-    borderColor: '#ccc',
+    borderColor: '#ddd',
   },
-  itemName: {
-    fontSize: 16,
+  quantityContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
   },
-  itemPrice: {
-    fontSize: 16,
+  quantityButton: {
+    fontSize: 20,
+    paddingHorizontal: 10,
+  },
+  quantity: {
+    fontSize: 18,
   },
 });
+
+export default CartScreen;
