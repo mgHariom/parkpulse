@@ -1,90 +1,8 @@
-import { View, Text, Image, TouchableOpacity, StyleSheet } from "react-native";
+import { View, Text, Image, TouchableOpacity, StyleSheet, ScrollView } from "react-native";
 import DropDownPicker from 'react-native-dropdown-picker';
 import { useState, useEffect } from "react";
 import FontAwesomeIcon from 'react-native-vector-icons/FontAwesome';
 import { Dropdown } from "react-native-element-dropdown";
-//https://hossein-zare.github.io/react-native-dropdown-picker-website/
-// export function City_dropdown (){
-//     const [open, setOpen] = useState(false);
-//     const [value, setValue] = useState(null);
-//     const [items, setItems] = useState([
-//     {label: 'Coimbatore', value: 'Coimbatore'},  
-//     {label: 'Chennai', value: 'chennai'},
-//     {label: 'Banglore', value: 'banglore'}
-//   ]);
-
-//   return (
-//     <DropDownPicker
-
-//     ArrowDownIconComponent={() => {
-
-//       return (
-//         <FontAwesomeIcon
-//           size={15}
-//           color={'#fff'}
-//           style={{ paddingHorizontal: 5 }}
-//           name="chevron-down"
-//         />
-//       );
-//     }}
-//     ArrowUpIconComponent={() => {
-//       return (
-//         <FontAwesomeIcon
-//           size={15}
-//           color={'#fff'}
-//           style={{ paddingHorizontal: 5 }}
-//           name="chevron-up"
-//         />
-//       );
-//     }}
-
-
-//       open={open}
-//       value={value}
-//       items={items}
-//       setOpen={setOpen}
-//       setValue={setValue}
-//       setItems={setItems}
-      
-//       containerStyle={{
-//              width: 310,
-//              color: '#fff',
-//              zIndex: 3
-//       }}
-
-//       style={{
-//         borderColor: '#fff',
-//         backgroundColor: '#0C1D36'
-//       }}
-
-//       translation={{
-//         PLACEHOLDER: "Coimbatore"
-//       }}
-
-//       placeholderStyle={{
-//         color: "#fff",
-//         fontSize: 19
-//       }}
-
-//       textStyle={{
-//         fontSize: 19,
-//         color: "#0C1D36"
-//       }}
-
-//       labelStyle={{
-//         color: '#fff'
-//       }}
-
-//       arrowIconStyle={{
-//         width: 15,
-//         height: 15,
-//         color: '#fff'
-        
-//       }}
-      
-//     />
-//   );
-// }
 
 export default function Home ({navigation, route}){
   const data = [
@@ -134,22 +52,18 @@ export default function Home ({navigation, route}){
       }, [navigation, route.name]);
     
     return(
-        <View style = {styles.container_img}>
-            {/* <City_dropdown/> */}
+        <ScrollView>
+          <View style = {styles.container_img}>
             <Dropdown
           style={[styles.dropdown, isFocus && { borderColor: 'blue' }]}
           placeholder={!isFocus ? 'Select a city' : ''}
           placeholderStyle={styles.placeholderStyle}
           selectedTextStyle={styles.selectedTextStyle}
-          //inputSearchStyle={styles.inputSearchStyle}
           iconStyle={styles.iconStyle}
           data={data}
-          //search
           maxHeight={300}
-          
           labelField="label"
           valueField="value"
-          //searchPlaceholder="Search..."
           value={value}
           onFocus={() => setIsFocus(true)}
           onBlur={() => setIsFocus(false)}
@@ -157,30 +71,7 @@ export default function Home ({navigation, route}){
             setValue(item.value);
             setIsFocus(true);
             navigation.navigate(item.value);
-
-        //     switch (item.value) {
-        //       case 'Coimbatore':
-        //         navigation.navigate('Coimbatore');
-        //         break;
-        //       case 'Chennai':
-        //         navigation.navigate('Chennai');
-        //         break;
-        //       case 'Banglore':
-        //         navigation.navigate('Banglore');
-        //         break;
-        //       default:
-        //         // Handle the default case, if needed
-        //         break;
-        //     }
-           }}
-          // renderLeftIcon={() => (
-          //   <AntDesign
-          //     style={styles.icon}
-          //     color={isFocus ? 'blue' : 'black'}
-          //     name="EnvironmentTwoTone"
-          //     size={20}
-          //   />
-          // )}
+          }}
         />
             <TouchableOpacity onPress={() => navigation.navigate('SecondPage',  { name: 'Brookefields' })}>
                 <Image 
@@ -223,6 +114,7 @@ export default function Home ({navigation, route}){
             </TouchableOpacity>
             
         </View>
+        </ScrollView>
     )
 }
 

@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet, Pressable } from "react-native";
+import { View, Text, StyleSheet, ScrollView } from "react-native";
 import Calendar from "./Calendar";
 
 export default function SecondPage ({ route, navigation }) {
@@ -6,16 +6,18 @@ export default function SecondPage ({ route, navigation }) {
   const {name} = route.params;
 
   return(
-    <View style={styles.container}>
-      <View style={styles.mallContainerAlign}>
-        <View style={styles.mallContainer}>
-          <Text style={styles.mallText}>{name}</Text>
+    <ScrollView style={styles.scrollView}>
+      <View style={styles.container}>
+        <View style={styles.mallContainerAlign}>
+          <View style={styles.mallContainer}>
+            <Text style={styles.mallText}>{name}</Text>
+          </View>
+        </View>
+        <View>
+          <Calendar/>
         </View>
       </View>
-      <View>
-        <Calendar/>
-      </View>
-    </View>
+    </ScrollView>
   )
 }
 
@@ -23,6 +25,10 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#d8f0fa'
+  },
+
+  scrollView: {
+    backgroundColor: '#d8f0fa',
   },
 
   mallContainerAlign: {
@@ -36,7 +42,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     justifyContent: 'center',
     alignContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
   },
 
   mallText: {

@@ -1,6 +1,7 @@
 import { View, Text, Image, TouchableOpacity, StyleSheet } from "react-native";
 import { useState, useEffect } from "react";
 import { Dropdown } from "react-native-element-dropdown";
+import { ScrollView } from "react-native-gesture-handler";
 
 
 export default function Coimbatore ({navigation, route}){
@@ -40,7 +41,8 @@ export default function Coimbatore ({navigation, route}){
     }, [navigation, route.name]);
     
     return(
-        <View style = {styles.container_img}>
+        <ScrollView>
+          <View style = {styles.container_img}>
             <Dropdown
               style={[styles.dropdown, isFocus && { borderColor: 'blue' }]}
               placeholder={!isFocus ? 'Coimbatore' : ''}
@@ -101,6 +103,7 @@ export default function Coimbatore ({navigation, route}){
             </TouchableOpacity>
             
         </View>
+        </ScrollView>
     )
 }
 
