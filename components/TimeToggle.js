@@ -1,61 +1,67 @@
-import React, { useState } from 'react';
-import { View, Text, TouchableOpacity, FlatList, StyleSheet } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 
-const CartScreen = () => {
-  const [cartItems, setCartItems] = useState([
-    { id: 1, name: 'Item 1', price: 10, quantity: 1 },
-    { id: 2, name: 'Item 2', price: 15, quantity: 2 },
-    { id: 3, name: 'Item 3', price: 20, quantity: 3 },
-  ]);
+const SessionTimer = () => {
+  const initialSessionTime = 7 * 60; // 7:00 AM in minutes
+  const [sessionLength, setSessionLength] = useState(initialSessionTime);
+  const [isSessionActive, setIsSessionActive] = useState(false);
+  const [period, setPeriod] = useState('AM')
+  const [timer, setTimer] = useState(null);
 
-  const onIncrement = (item) => {
-    const updatedCart = cartItems.map((cartItem) => {
-      if (cartItem.id === item.id) {
-        return { ...cartItem, quantity: cartItem.quantity + 1 };
-      }
-      return cartItem;
-    });
-    setCartItems(updatedCart);
+  //AM and Pm toggle
+  const periodToggle = () => {
+    setPeriod(period === 'AM' ? 'PM' : 'AM');
+  }
+
+  // Format the time in "hh:mm AM/PM" format
+  const formatTime = (timeInMinutes) => {
+    const hours = Math.floor(timeInMinutes / 60);
+    const formattedHours = (hours % 12 || 12).toString(); // Display 12-hour time format
+    
+
+    // Calculate the minutes separately and pad them with leading zeros
+    const formattedMinutes = (timeInMinutes % 60).toString().padStart(2, '0');
+
+    return `${formattedHours}:${formattedMinutes}`;
   };
 
-  const onDecrement = (item) => {
-    const updatedCart = cartItems.map((cartItem) => {
-      if (cartItem.id === item.id && cartItem.quantity > 1) {
-        return { ...cartItem, quantity: cartItem.quantity - 1 };
-      }
-      return cartItem;
-    });
-    setCartItems(updatedCart);
+  const incrementSessionLength = () => {
+    if (!isSessionActive && sessionLength < 720) {
+      setSessionLength((prevSessionLength) => prevSessionLength + 30);
+    }
   };
 
-  const renderItem = ({ item }) => (
-    <CartItem item={item} onIncrement={onIncrement} onDecrement={onDecrement} />
-  );
+  const decrementSessionLength = () => {
+    if (!isSessionActive && sessionLength > 60) {
+      setSessionLength((prevSessionLength) => prevSessionLength - 30);
+    }
+  };
+
+  useEffect(() => {
+    if (sessionLength === 0) {
+      // Session has ended
+      clearInterval(timer);
+      // You can add a sound or notification for session completion here
+    }
+  }, [sessionLength, timer]);
 
   return (
     <View style={styles.container}>
-      <FlatList
-        data={cartItems}
-        renderItem={renderItem}
-        keyExtractor={(item) => item.id.toString()}
-      />
-    </View>
-  );
-};
-
-const CartItem = ({ item, onIncrement, onDecrement }) => {
-  return (
-    <View style={styles.cartItem}>
-      <Text>{item.name}</Text>
-      <Text>${item.price}</Text>
-      <View style={styles.quantityContainer}>
-        <TouchableOpacity onPress={() => onDecrement(item)}>
-          <Text style={styles.quantityButton}>-</Text>
+      <View style={styles.buttonsContainer}>
+        <TouchableOpacity onPress={decrementSessionLength} style={styles.button}>
+          <Text style={styles.buttonText}>-</Text>
         </TouchableOpacity>
-        <Text style={styles.quantity}>{item.quantity}</Text>
-        <TouchableOpacity onPress={() => onIncrement(item)}>
-          <Text style={styles.quantityButton}>+</Text>
+        <View style={styles.timerContainer}>
+          <Text style={styles.timer}>{formatTime(sessionLength)}</Text>
+        </View>
+        <TouchableOpacity onPress={incrementSessionLength} style={styles.button}>
+          <Text style={styles.buttonText}>+</Text>
         </TouchableOpacity>
+        <View style={styles.periodContainer}>
+        <TouchableOpacity onPress={periodToggle}>
+          <Text style={styles.periodText}>{period}</Text>
+        </TouchableOpacity>
+      </View>
       </View>
     </View>
   );
@@ -64,27 +70,49 @@ const CartItem = ({ item, onIncrement, onDecrement }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 10,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
-  cartItem: {
+  periodContainer: {
+    backgroundColor: '#264259',
+    paddingHorizontal: 10,
+    paddingVertical: 10,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 5,
+    margin: 20,
+  },
+  periodText: {
+    color: '#fff',
+    fontSize: 24
+  },
+  timerContainer: {
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  timer: {
+    fontSize: 36,
+    backgroundColor: '#264259',
+    color: '#fff',
+    width: 171,
+    textAlign: 'center',
+  },
+  buttonsContainer: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    padding: 10,
-    borderBottomWidth: 1,
-    borderColor: '#ddd',
   },
-  quantityContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
+  button: {
+    backgroundColor: '#fff',
+    paddingHorizontal: 20,
+    paddingVertical: 10,
+    borderRadius: 5,
   },
-  quantityButton: {
-    fontSize: 20,
-    paddingHorizontal: 10,
+  buttonText: {
+    color: '#264259',
+    fontSize: 24,
   },
-  quantity: {
-    fontSize: 18,
-  },
+  // ...
 });
 
-export default CartScreen;
+export default SessionTimer;
