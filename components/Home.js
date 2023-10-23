@@ -14,17 +14,6 @@ export default function Home ({navigation, route}){
   const [value, setValue] = useState(null);
   const [isFocus, setIsFocus] = useState(false);
 
-  const renderLabel = () => {
-      if (value || isFocus) {
-        return (
-          <Text style={[styles.label, isFocus && { color: 'blue' }]}>
-            Dropdown label
-          </Text>
-        );
-      }
-      return null;
-    };
-
   const resetDropdownValue = (newValue) => {
         setValue(newValue);
       };

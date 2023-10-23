@@ -8,6 +8,7 @@ import Chennai from './components/Chennai';
 import Bangalore from './components/Bangalore';
 import Home from './components/Home';
 import TimeToggle from './components/TimeToggle';
+import ThirdPage from './components/ThirdPage';
 
 
 export default function App() {
@@ -44,6 +45,7 @@ function MyStack() {
       <Stack.Screen name="Bangalore" component={Bangalore} />
       <Stack.Screen name="SecondPage" component={second_page} />
       <Stack.Screen name="TimeToggle" component={TimeToggle} />
+      <Stack.Screen name="ThirdPage" component={ThirdPage} />
     </Stack.Navigator>
   );
 }

@@ -48,7 +48,9 @@ export default function SecondPage ({ route, navigation }) {
         </View>
         <View style={styles.slotBookerAlign}>
             <View style={styles.slotBookercontainer}>
-              <TouchableOpacity style={styles.slotBookerText} onPress={() => navigation.navigate()}>BOOK A SLOT</TouchableOpacity>
+              <TouchableOpacity onPress={() => navigation.navigate('ThirdPage')}>
+                <Text style={styles.slotBookerText}>BOOK A SLOT</Text>
+              </TouchableOpacity>
             </View>
           </View>
       </View>
