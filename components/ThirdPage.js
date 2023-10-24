@@ -1,109 +1,137 @@
 import React, { useState } from 'react';
 import { View, StyleSheet, TouchableOpacity, Text } from 'react-native';
-import SeatsLayout from "@mindinventory/react-native-bus-seat-layout";
-import { parkingSlot } from './Index';
 
 const SeatSelection = () => {
+  const numRows = 5;
+  const numCols = 3; // Updated to 3 columns
+  const columnSpacing = 10; // Adjust the spacing as needed
 
-  return(
-    <View>
-      <SeatsLayout
-        row={14}
-        layout={{ columnOne: 3, columnTwo: 2 }}
-        selectedSeats={[
-            { seatNumber: 1, seatType: 'booked' },
-            { seatNumber: 11, seatType: 'women' },
-            { seatNumber: 17, seatType: 'women' },
-            { seatNumber: 43, seatType: 'blocked' },
-        ]}
-        numberTextStyle={{ fontSize: 12 }}
-        seatImage={{ image: parkingSlot, tintColor: '#B2B2B2' }}
-        getBookedSeats={(seats) => {
-            console.log('getBookedSeats :: ', seats);
-        }}
-     />
+  const generateSeatData = () => {
+    const seats = [];
+    for (let row = 1; row <= numRows; row++) {
+      for (let col = 1; col <= numCols; col++) {
+        const seatId = `${String.fromCharCode(64 + row)}-${col}`;
+        seats.push({ id: seatId, status: 'available' });
+      }
+    }
+    return seats;
+  };
+
+  const [seatData, setSeatData] = useState(generateSeatData());
+  const [selectedSeats, setSelectedSeats] = useState([]);
+
+  const toggleSeatSelection = (seatId) => {
+    const updatedSeatData = seatData.map((seat) => {
+      if (seat.id === seatId) {
+        return {
+          ...seat,
+          status: seat.status === 'available' ? 'selected' : 'available',
+        };
+      }
+      return seat;
+    });
+
+    setSeatData(updatedSeatData);
+  };
+
+  const handleConfirmBooking = () => {
+    const newlySelectedSeats = seatData.filter((seat) => seat.status === 'selected');
+    setSelectedSeats(newlySelectedSeats);
+  };
+
+  console.log(selectedSeats);
+
+  return (
+    <View style={styles.container}>
+      <View style={styles.seatingArrangement}>
+        {Array.from({ length: numRows }, (_, rowIndex) => (
+          <View key={rowIndex} style={styles.row}>
+            {Array.from({ length: numCols }, (_, colIndex) => {
+              const seatIndex = rowIndex * numCols + colIndex;
+              const seat = seatData[seatIndex];
+              return (
+                <TouchableOpacity
+                  key={seat.id}
+                  style={[
+                    styles.seat,
+                    {
+                      backgroundColor: seat.status === 'selected' ? '#264259' : '#d8f0fa',
+                      borderColor: seat.status === 'selected' ? '#fff' : '#264259',
+                      marginRight: colIndex < numCols - 1 ? columnSpacing : 0,
+                    },
+                  ]}
+                  onPress={() => toggleSeatSelection(seat.id)}
+                >
+                  <Text style={styles.seatText}>{seat.id}</Text>
+                </TouchableOpacity>
+              );
+            })}
+          </View>
+        ))}
+      </View>
+
+      <View style={styles.selectedSeats}>
+        <Text style={styles.selectedSeatsText}>Selected Seats:</Text>
+          {selectedSeats.map((seat) => (
+            <Text key={seat.id} style={styles.selectedSeat}>
+              {seat.id}
+            </Text>
+          ))}
+      </View>
+
+
+      <TouchableOpacity onPress={handleConfirmBooking} style={styles.confirmButton}>
+        <Text>Confirm Booking</Text>
+      </TouchableOpacity>
     </View>
-  )
-  // const initialSeatData = [
-  //     ['available', 'available', 'available'],
-  //     ['available', 'available', 'available'],
-  //     // ...
-  //   ];
-  
-  // const [seatData, setSeatData] = useState(initialSeatData);
-      
-  // const [selectedSeats, setSelectedSeats] = useState([]);
-
-  // const toggleSeatSelection = (row, col) => {
-  //   // Toggle the seat state between "available" and "selected"
-  //   const newSeatData = [...seatData];
-  //   newSeatData[row][col] = seatData[row][col] === 'available' ? 'selected' : 'available';
-  //   setSeatData(newSeatData);
-  // };
-
-  // const handleConfirmBooking = () => {
-  //   // Implement booking logic here, mark selected seats as "booked"
-  //   // Send the selected seats to the server if necessary
-  // };
-
-  // return (
-  //   <View style={styles.container}>
-  //     <View style={styles.seatingArrangement}>
-  //       {seatData.map((row, rowIndex) => (
-  //         <View key={rowIndex} style={styles.row}>
-  //           {row.map((seat, colIndex) => (
-  //             <TouchableOpacity
-  //               key={colIndex}
-  //               style={[
-  //                 styles.seat,
-  //                 { backgroundColor: seat === 'selected' ? 'blue' : 'gray' },
-  //               ]}
-  //               onPress={() => toggleSeatSelection(rowIndex, colIndex)}
-  //             >
-  //               <Text>{rowIndex + 1}-{colIndex + 1}</Text>
-  //             </TouchableOpacity>
-  //           ))}
-  //         </View>
-  //       ))}
-  //     </View>
-
-  //     <View style={styles.selectedSeats}>
-  //       <Text>Selected Seats:</Text>
-  //       {selectedSeats.map((seat) => (
-  //         <Text key={seat}>{seat}</Text>
-  //       ))}
-  //     </View>
-
-  //     <TouchableOpacity onPress={handleConfirmBooking} style={styles.confirmButton}>
-  //       <Text>Confirm Booking</Text>
-  //     </TouchableOpacity>
-  //   </View>
-  // );
+  );
 };
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 20,
+    backgroundColor: '#d8f0fa',
   },
   seatingArrangement: {
-    // Style for the seating arrangement container
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   row: {
     flexDirection: 'row',
   },
   seat: {
-    // Style for individual seats
+    width: 80,
+    height: 80,
+    margin: 5,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderWidth: 2,
+    borderRadius: 8,
+  },
+  seatText: {
+    fontSize: 16,
   },
   selectedSeats: {
     marginTop: 20,
   },
   confirmButton: {
     marginTop: 20,
-    backgroundColor: 'green',
+    backgroundColor: '#264259',
     padding: 10,
     alignItems: 'center',
   },
+  selectedSeatsText: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    color: '#264259',
+  },
+  selectedSeat: {
+    fontSize: 16,
+    color: '#264259',
+    fontWeight: 'bold',
+  },
+  
 });
 
 export default SeatSelection;

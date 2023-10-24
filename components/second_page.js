@@ -7,9 +7,8 @@ export default function SecondPage ({ route, navigation }) {
 
   const {name} = route.params;
 
-  const onPressControl = (entryTimeLength) => {
+  const onPressControl = () => {
     navigation.navigate('ThirdPage')
-    console.log(entryTimeLength)
   }
 
   return(
