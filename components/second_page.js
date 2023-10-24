@@ -1,10 +1,16 @@
 import { View, Text, StyleSheet, ScrollView, Pressable, TouchableOpacity } from "react-native";
 import Calendar from "./Calendar";
 import SessionTimer from "./TimeToggle";
+import SessionTimer2 from "./TimeToggle2";
 
 export default function SecondPage ({ route, navigation }) {
 
   const {name} = route.params;
+
+  const onPressControl = (entryTimeLength) => {
+    navigation.navigate('ThirdPage')
+    console.log(entryTimeLength)
+  }
 
   return(
     <ScrollView style={styles.scrollView}>
@@ -31,7 +37,7 @@ export default function SecondPage ({ route, navigation }) {
           </View>
         </View>
         <View>
-          <SessionTimer/>
+          <SessionTimer2/>
         </View>
         <View style={styles.slotCheckerAlign}>
           <View style={styles.slotCheckerContainer}>
@@ -48,7 +54,7 @@ export default function SecondPage ({ route, navigation }) {
         </View>
         <View style={styles.slotBookerAlign}>
             <View style={styles.slotBookercontainer}>
-              <TouchableOpacity onPress={() => navigation.navigate('ThirdPage')}>
+              <TouchableOpacity onPress={onPressControl}>
                 <Text style={styles.slotBookerText}>BOOK A SLOT</Text>
               </TouchableOpacity>
             </View>

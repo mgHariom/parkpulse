@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 
-const SessionTimer = () => {
-  const entryTime = 7 * 60; // 7:00 AM in minutes
-  const [entryTimeLength, setEntryTimeLength] = useState(entryTime);
+const SessionTimer2 = () => {
+  const exitTime = 7.5 * 60; // 7:30 AM in minutes
+  const [exitTimeLength, setExitTimeLength] = useState(exitTime);
   const [isSessionActive, setIsSessionActive] = useState(false);
   const [period, setPeriod] = useState('AM')
   const [timer, setTimer] = useState(null);
@@ -26,24 +26,24 @@ const SessionTimer = () => {
   };
 
   const incremententryTimeLength = () => {
-    if (!isSessionActive && entryTimeLength < 720) {
-      setEntryTimeLength((preventryTimeLength) => preventryTimeLength + 30);
+    if (!isSessionActive && exitTimeLength < 720) {
+      setExitTimeLength((prevexitTimeLength) => prevexitTimeLength + 30);
     }
   };
 
   const decremententryTimeLength = () => {
-    if (!isSessionActive && entryTimeLength > 60) {
-      setEntryTimeLength((preventryTimeLength) => preventryTimeLength - 30);
+    if (!isSessionActive && exitTimeLength > 60) {
+      setExitTimeLength((prevexitTimeLength) => prevexitTimeLength - 30);
     }
   };
 
   useEffect(() => {
-    if (entryTimeLength === 0) {
+    if (exitTimeLength === 0) {
       // Session has ended
       clearInterval(timer);
       // You can add a sound or notification for session completion here
     }
-  }, [entryTimeLength, timer]);
+  }, [exitTimeLength, timer]);
 
   return (
     <View style={styles.container}>
@@ -52,7 +52,7 @@ const SessionTimer = () => {
           <Text style={styles.buttonText}>-</Text>
         </TouchableOpacity>
         <View style={styles.timerContainer}>
-          <Text style={styles.timer}>{formatTime(entryTimeLength)}</Text>
+          <Text style={styles.timer}>{formatTime(exitTimeLength)}</Text>
         </View>
         <TouchableOpacity onPress={incremententryTimeLength} style={styles.button}>
           <Text style={styles.buttonText}>+</Text>
@@ -115,4 +115,4 @@ const styles = StyleSheet.create({
   // ...
 });
 
-export default SessionTimer;
+export default SessionTimer2;
