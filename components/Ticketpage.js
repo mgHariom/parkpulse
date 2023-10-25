@@ -21,11 +21,8 @@ const Ticketpage = ({ route }) => {
 
   return (
     <View style={styles.container}>
-      <Text style={ticketStyle.headingText}>Parking Receipt</Text>
       <View style={ticketStyle.container}>
-        <View>
-          
-        </View>
+          <Text style={ticketStyle.headingText}>Parking Receipt</Text>
         <View>
           {data.map((seat) => (
             <View key={seat.id}>
@@ -37,7 +34,7 @@ const Ticketpage = ({ route }) => {
               <View style={ticketStyle.infocontainer}>
               <Text style={ticketStyle.mallname}>mall</Text>
               <Text style={ticketStyle.mall}>{name}</Text>
-              <Text style={ticketStyle.slotheading}>seat ID</Text>
+              <Text style={ticketStyle.slotheading}>parking slot</Text>
               <Text style={ticketStyle.slot}>{seat.id}</Text>
               <Text style={ticketStyle.timeheading}>time</Text>
               <Text style={ticketStyle.time}>{formatTime(time)}<Text> </Text>{period}</Text>
@@ -46,6 +43,7 @@ const Ticketpage = ({ route }) => {
           ))}
         </View>
       </View>
+      <Text style={styles.alertText}>Please take a sceenshot of this Receipt :)</Text>
     </View>
   );
 };
@@ -54,14 +52,19 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#d8f0fa',
-    // justifyContent: 'center',
+    justifyContent: 'center',
     alignItems: 'center'
+  },
+  alertText: {
+    opacity: 0.4,
+    fontSize: 18,
+    paddingTop: 30
   },
 })
 
 const ticketStyle = StyleSheet.create({
   container: {
-    height: 500,
+    height: 620,
     width: 350,
     backgroundColor: '#fff',
     borderRadius: 8,
@@ -82,7 +85,7 @@ const ticketStyle = StyleSheet.create({
   },
 
   infocontainer: {
-    paddingLeft: 48,
+    paddingLeft: 48
   },
 
   mall: {
@@ -111,7 +114,8 @@ const ticketStyle = StyleSheet.create({
 
   timeheading: {
     opacity: 0.4,
-    fontSize: 18
+    fontSize: 18,
+    paddingTop: 10
   },
 
   time: {
