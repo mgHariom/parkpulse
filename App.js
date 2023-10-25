@@ -9,6 +9,7 @@ import Bangalore from './components/Bangalore';
 import Home from './components/Home';
 import TimeToggle from './components/TimeToggle';
 import ThirdPage from './components/ThirdPage';
+import Ticketpage from './components/Ticketpage';
 
 
 export default function App() {
@@ -46,6 +47,7 @@ function MyStack() {
       <Stack.Screen name="SecondPage" component={second_page} />
       <Stack.Screen name="TimeToggle" component={TimeToggle} />
       <Stack.Screen name="ThirdPage" component={ThirdPage} />
+      <Stack.Screen name="Ticketpage" component={Ticketpage} />
     </Stack.Navigator>
   );
 }

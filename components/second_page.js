@@ -30,14 +30,14 @@ export default function SecondPage ({ route, navigation }) {
         <View>
           <SessionTimer/>
         </View>
-        <View style={styles.timeHeadingAlign}>
+        {/* <View style={styles.timeHeadingAlign}>
           <View style={styles.timeHeadingContainer}>
             <Text style={styles.timeHeadingText}>EXIT TIME</Text>
           </View>
         </View>
         <View>
           <SessionTimer2/>
-        </View>
+        </View> */}
         <View style={styles.slotCheckerAlign}>
           <View style={styles.slotCheckerContainer}>
             <Text style={styles.slotCheckerText}>SLOTS AVAILABLE</Text>

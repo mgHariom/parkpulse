@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { View, StyleSheet, TouchableOpacity, Text } from 'react-native';
+import { View, StyleSheet, TouchableOpacity, Text} from 'react-native';
 
-const SeatSelection = () => {
+const SeatSelection = ({navigation}) => {
   const numRows = 5;
   const numCols = 3; // Updated to 3 columns
   const columnSpacing = 10; // Adjust the spacing as needed
@@ -27,19 +27,33 @@ const SeatSelection = () => {
           ...seat,
           status: seat.status === 'available' ? 'selected' : 'available',
         };
+      } else if (seat.status === 'selected') {
+        // Deselect the previously selected seat
+        return {
+          ...seat,
+          status: 'available',
+        };
       }
       return seat;
     });
-
+  
+    const newlySelectedSeat = updatedSeatData.find((seat) => seat.status === 'selected');
+    setSelectedSeats(newlySelectedSeat ? [newlySelectedSeat] : []);
+  
     setSeatData(updatedSeatData);
   };
+  
 
   const handleConfirmBooking = () => {
     const newlySelectedSeats = seatData.filter((seat) => seat.status === 'selected');
     setSelectedSeats(newlySelectedSeats);
+  
+    console.log(newlySelectedSeats);
+
+   navigation.navigate('Ticketpage', {data : newlySelectedSeats});
   };
 
-  console.log(selectedSeats);
+  
 
   return (
     <View style={styles.container}>
@@ -68,15 +82,6 @@ const SeatSelection = () => {
             })}
           </View>
         ))}
-      </View>
-
-      <View style={styles.selectedSeats}>
-        <Text style={styles.selectedSeatsText}>Selected Seats:</Text>
-          {selectedSeats.map((seat) => (
-            <Text key={seat.id} style={styles.selectedSeat}>
-              {seat.id}
-            </Text>
-          ))}
       </View>
 
 
