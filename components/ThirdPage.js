@@ -3,11 +3,11 @@ import { View, StyleSheet, TouchableOpacity, Text} from 'react-native';
 
 const SeatSelection = ({navigation, route}) => {
 
-  const {time, period, name} = route.params
+  const {time, period, name, date} = route.params
 
   console.log(period);
 
-  const numRows = 5;
+  const numRows = 4;
   const numCols = 3; // Updated to 3 columns
   const columnSpacing = 10; // Adjust the spacing as needed
 
@@ -55,7 +55,7 @@ const SeatSelection = ({navigation, route}) => {
   
     console.log(newlySelectedSeats);
 
-   navigation.navigate('Ticketpage', {data : newlySelectedSeats, time: time, period:period, name:name});
+   navigation.navigate('Ticketpage', {data : newlySelectedSeats, time: time, period:period, name:name, date: date});
   };
 
   

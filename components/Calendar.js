@@ -5,7 +5,7 @@ import { startOfMonth, endOfMonth, eachDayOfInterval, format, getDate, addDays, 
 const Calendar = () => {
   const [currentMonth, setCurrentMonth] = useState(new Date());
   const [selectedDate, setSelectedDate] = useState(null);
-
+  console.log(selectedDate)
   const handleDateSelection = (date) => {
     setSelectedDate(date);
   };

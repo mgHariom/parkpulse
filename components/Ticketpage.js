@@ -1,11 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import QRCode from 'react-native-qrcode-svg';
+import { startOfMonth, endOfMonth, eachDayOfInterval, format, getDate, addDays, isSameDay, getDay } from 'date-fns';
 
 const Ticketpage = ({ route }) => {
   // Extract the 'data' and 'time' parameters from the route
-  const { data, time, period, name } = route.params;
-  console.log(period)
+  const { data, time, period, name, date } = route.params;
+  const formattedDate = format(date, 'MMMM d, yyyy');
 
   // Format the time in "hh:mm AM/PM" format
   const formatTime = (timeInMinutes) => {
@@ -17,7 +18,7 @@ const Ticketpage = ({ route }) => {
     const formattedMinutes = (timeInMinutes % 60).toString().padStart(2, '0');
 
     return `${formattedHours}:${formattedMinutes}`;
-  };
+  };
 
   return (
     <View style={styles.container}>
@@ -28,7 +29,7 @@ const Ticketpage = ({ route }) => {
             <View key={seat.id}>
               <View style={ticketStyle.qrContainer}>
                 <QRCode 
-                  value={`${seat.id} ${formatTime(time)} ${period}`} size={250} 
+                  value={`${name} ${seat.id} ${formatTime(time)} ${period} ${formattedDate}`} size={250} 
                   color='#000'/>
               </View>
               <View style={ticketStyle.infocontainer}>
@@ -38,6 +39,8 @@ const Ticketpage = ({ route }) => {
               <Text style={ticketStyle.slot}>{seat.id}</Text>
               <Text style={ticketStyle.timeheading}>time</Text>
               <Text style={ticketStyle.time}>{formatTime(time)}<Text> </Text>{period}</Text>
+              <Text style={ticketStyle.timeheading}>date</Text>
+              <Text style={ticketStyle.time}>{formattedDate}</Text>
               </View>
             </View>
           ))}
@@ -58,13 +61,13 @@ const styles = StyleSheet.create({
   alertText: {
     opacity: 0.4,
     fontSize: 18,
-    paddingTop: 30
+    paddingTop: 18
   },
 })
 
 const ticketStyle = StyleSheet.create({
   container: {
-    height: 620,
+    height: 670,
     width: 350,
     backgroundColor: '#fff',
     borderRadius: 8,

@@ -1,6 +1,9 @@
 import { View, Text, StyleSheet, ScrollView, Pressable, TouchableOpacity } from "react-native";
 import Calendar from "./Calendar";
 import React, { useState, useEffect } from 'react';
+import { startOfMonth, endOfMonth, eachDayOfInterval, format, getDate, addDays, isSameDay, getDay,  } from 'date-fns';
+
+
 
 export default function SecondPage ({ route, navigation }) {
 
@@ -9,6 +12,25 @@ export default function SecondPage ({ route, navigation }) {
   const [isSessionActive, setIsSessionActive] = useState(false);
   const [period, setPeriod] = useState('AM')
   const [timer, setTimer] = useState(null);
+
+  const [currentMonth, setCurrentMonth] = useState(new Date());
+  const [selectedDate, setSelectedDate] = useState(null);
+  console.log(selectedDate)
+  const handleDateSelection = (date) => {
+    setSelectedDate(date);
+  };
+
+  const currentDate = new Date();
+  const firstDayOfMonth = startOfMonth(currentDate);
+
+  const fiveDays = [];
+  for (let i = 0; i < 5; i++) {
+    const day = addDays(currentDate, i);
+    fiveDays.push(day);
+  }
+
+  // Create an array of day names
+  const dayNames = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 
   //AM and Pm toggle
   const periodToggle = () => {
@@ -51,7 +73,7 @@ export default function SecondPage ({ route, navigation }) {
   const {name} = route.params;
 
   const onPressControl = () => {
-    navigation.navigate('ThirdPage', {time: entryTimeLength, period: period, name:name})
+    navigation.navigate('ThirdPage', {time: entryTimeLength, period: period, name:name, date: selectedDate})
   }
   console.log(period)
 
@@ -64,7 +86,35 @@ export default function SecondPage ({ route, navigation }) {
           </View>
         </View>
         <View>
-          <Calendar/>
+        <View style={calendarStyles.container}>
+      <View style={calendarStyles.month}>
+        <Text style={calendarStyles.monthText}>{format(currentMonth, 'MMMM yyyy')}</Text>
+      </View>
+      <View style={{ flexDirection: 'row', flexWrap: 'wrap' }}>
+        {fiveDays.map((day, index) => (
+          <TouchableOpacity
+            key={day.toISOString()}
+            onPress={() => handleDateSelection(day)}
+            style={{
+              flexBasis: '18%',
+              alignItems: 'center',
+              padding: 5,
+            }}
+          >
+            <View
+              style={[
+                calendarStyles.dateContainer,
+                isSameDay(day, selectedDate) && calendarStyles.selectedDateContainer,
+                isSameDay(day, currentDate) && calendarStyles.currentDateContainer,
+              ]}
+            >
+              <Text style={calendarStyles.dateText}>{getDate(day)}</Text>
+              <Text style={calendarStyles.dayText}>{dayNames[getDay(day)]}</Text>
+            </View>
+          </TouchableOpacity>
+        ))}
+      </View>
+    </View>
         </View>
         <View style={styles.timeHeadingAlign}>
           <View style={styles.timeHeadingContainer}>
@@ -103,16 +153,16 @@ export default function SecondPage ({ route, navigation }) {
           </View>
           <View style={styles.slotCounterAlign}>
             <View style={styles.slotCounterContainer}>
-              <Text style={styles.slotCounterText}>1</Text>
+              <Text style={styles.slotCounterText}>12</Text>
             </View>
-            <View style={styles.slotCounterContainer}>
-              <Text style={styles.slotCounterText}>0</Text>
-            </View>
+            {/* <View style={styles.slotCounterContainer}>
+              <Text style={styles.slotCounterText}>2</Text>
+            </View> */}
           </View>
         </View>
         <View style={styles.slotBookerAlign}>
-            <View style={styles.slotBookercontainer}>
-              <TouchableOpacity onPress={onPressControl}>
+            <View>
+              <TouchableOpacity onPress={onPressControl}  style={styles.slotBookercontainer}>
                 <Text style={styles.slotBookerText}>BOOK A SLOT</Text>
               </TouchableOpacity>
             </View>
@@ -193,8 +243,8 @@ const styles = StyleSheet.create({
   },
   slotCounterContainer: {
     backgroundColor: '#fff',
-    width: 44,
-    height: 61,
+    width: 54,
+    height: 68,
     borderRadius: 10,
     justifyContent: 'center',
     alignItems: 'center',
@@ -269,4 +319,54 @@ const timerStyles = StyleSheet.create({
     fontSize: 24,
   },
   // ...
+});
+
+const calendarStyles = StyleSheet.create({
+  container: {
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  month: {
+    width: 200,
+    height: 50,
+    borderRadius: 8,
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    margin: 30,
+    backgroundColor: '#264259',
+  },
+  monthText: {
+    color: '#fff',
+    fontSize: 24,
+    fontWeight: '400',
+  },
+  dateContainer: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: 10,
+    backgroundColor: '#264259',
+    borderRadius: 8,
+    width: 50,
+    height: 80,
+  },
+  dateText: {
+    color: '#fff',
+    fontSize: 18,
+  },
+  dayText: {
+    color: '#fff',
+  },
+  selectedDateContainer: {
+    backgroundColor: '#45a7f7',
+  },
+  selectedDateText: {
+    color: '#fff',
+  },
+//   currentDateContainer: {
+//     backgroundColor: '#e74c3c',
+//   },
+//   currentDateText: {
+//     color: '#fff',
+//   },
 });
