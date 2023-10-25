@@ -8,6 +8,13 @@
     "ios": "expo start --ios",
     "web": "expo start --web"
   },
+
+  "rnpm": {
+    "assets": [
+      "./assets/fonts/"
+    ]
+  },
+
   "dependencies": {
     "@ant-design/icons": "^5.2.6",
     "@expo/webpack-config": "^19.0.0",
@@ -44,4 +51,10 @@
     "@babel/core": "^7.20.0"
   },
   "private": true
+
+  
+
 }
+
+
+

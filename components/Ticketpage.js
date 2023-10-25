@@ -21,9 +21,10 @@ const Ticketpage = ({ route }) => {
 
   return (
     <View style={styles.container}>
+      <Text style={ticketStyle.headingText}>Parking Receipt</Text>
       <View style={ticketStyle.container}>
         <View>
-          <Text style={ticketStyle.headingText}>Parking Receipt</Text>
+          
         </View>
         <View>
           {data.map((seat) => (
@@ -33,9 +34,14 @@ const Ticketpage = ({ route }) => {
                   value={`${seat.id} ${formatTime(time)} ${period}`} size={250} 
                   color='#000'/>
               </View>
-              <Text>Mall name: {name}</Text>
-              <Text>Seat ID: {seat.id}</Text>
-              <Text>Time:{formatTime(time)}{period} </Text>
+              <View style={ticketStyle.infocontainer}>
+              <Text style={ticketStyle.mallname}>mall</Text>
+              <Text style={ticketStyle.mall}>{name}</Text>
+              <Text style={ticketStyle.slotheading}>seat ID</Text>
+              <Text style={ticketStyle.slot}>{seat.id}</Text>
+              <Text style={ticketStyle.timeheading}>time</Text>
+              <Text style={ticketStyle.time}>{formatTime(time)}<Text> </Text>{period}</Text>
+              </View>
             </View>
           ))}
         </View>
@@ -48,14 +54,14 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#d8f0fa',
-    justifyContent: 'center',
+    // justifyContent: 'center',
     alignItems: 'center'
   },
 })
 
 const ticketStyle = StyleSheet.create({
   container: {
-    height: 700,
+    height: 500,
     width: 350,
     backgroundColor: '#fff',
     borderRadius: 8,
@@ -71,8 +77,48 @@ const ticketStyle = StyleSheet.create({
     backgroundColor: '#fff',
     justifyContent: 'center',
     alignItems: 'center',
-    padding: 30
+    padding: 30,
+    borderRadius: 10,
   },
+
+  infocontainer: {
+    paddingLeft: 48,
+  },
+
+  mall: {
+    // opacity: 1,
+    fontSize: 24,
+    textTransform: 'uppercase',
+    fontWeight: 'bold'
+  },
+
+  mallname: {
+    opacity: 0.4,
+    fontSize: 18
+  },
+
+  slotheading: {
+    opacity: 0.4,
+    fontSize: 18,
+    paddingTop: 10
+  },
+
+  slot: {
+    fontSize: 24,
+    textTransform: 'uppercase',
+    fontWeight: 'bold'
+  },
+
+  timeheading: {
+    opacity: 0.4,
+    fontSize: 18
+  },
+
+  time: {
+    fontSize: 24,
+    textTransform: 'uppercase',
+    fontWeight: 'bold'
+  }
 })
 
 export default Ticketpage;
