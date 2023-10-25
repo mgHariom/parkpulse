@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { View, StyleSheet, TouchableOpacity, Text} from 'react-native';
+import { ScrollView } from 'react-native-gesture-handler';
 
 const SeatSelection = ({navigation, route}) => {
 
@@ -61,7 +62,8 @@ const SeatSelection = ({navigation, route}) => {
   
 
   return (
-    <View style={styles.container}>
+    <ScrollView style={styles.scrollView}>
+      <View style={styles.container}>
       <View style={headerStyle.container}>
         <View style={headerStyle.mallContainerAlign}>
           <View style={headerStyle.mallContainer}>
@@ -101,10 +103,12 @@ const SeatSelection = ({navigation, route}) => {
         <Text style={styles.confirmButtonText}>Confirm Booking</Text>
       </TouchableOpacity>
     </View>
+    </ScrollView>
   );
 };
 
 const headerStyle = StyleSheet.create({
+
   container: {
     flex: 0.4,
     backgroundColor: '#d8f0fa'
@@ -132,6 +136,9 @@ const headerStyle = StyleSheet.create({
 })
 
 const styles = StyleSheet.create({
+  scrollView: {
+    backgroundColor: '#d8f0fa',
+  },
   container: {
     flex: 1,
     padding: 20,

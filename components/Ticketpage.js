@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import QRCode from 'react-native-qrcode-svg';
 import { startOfMonth, endOfMonth, eachDayOfInterval, format, getDate, addDays, isSameDay, getDay } from 'date-fns';
+import { ScrollView } from 'react-native-gesture-handler';
 
 const Ticketpage = ({ route }) => {
   // Extract the 'data' and 'time' parameters from the route
@@ -21,7 +22,8 @@ const Ticketpage = ({ route }) => {
   };
 
   return (
-    <View style={styles.container}>
+    <ScrollView style={styles.scrollView}>
+      <View style={styles.container}>
       <View style={ticketStyle.container}>
           <Text style={ticketStyle.headingText}>Parking Receipt</Text>
         <View>
@@ -48,10 +50,14 @@ const Ticketpage = ({ route }) => {
       </View>
       <Text style={styles.alertText}>Please take a sceenshot of this Receipt :)</Text>
     </View>
+    </ScrollView>
   );
 };
 
 const styles = StyleSheet.create({
+  scrollView: {
+    backgroundColor: '#d8f0fa',
+  },
   container: {
     flex: 1,
     backgroundColor: '#d8f0fa',
