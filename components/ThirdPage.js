@@ -88,7 +88,7 @@ const SeatSelection = ({navigation, route}) => {
                   ]}
                   onPress={() => toggleSeatSelection(seat.id)}
                 >
-                  <Text style={styles.seatText}>{seat.id}</Text>
+                  <Text style={[styles.seatText, {color: seat.status === 'selected' ? '#fff' : '#264259',}]}>{seat.id}</Text>
                 </TouchableOpacity>
               );
             })}
