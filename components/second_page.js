@@ -1,15 +1,59 @@
 import { View, Text, StyleSheet, ScrollView, Pressable, TouchableOpacity } from "react-native";
 import Calendar from "./Calendar";
-import SessionTimer from "./TimeToggle";
-import SessionTimer2 from "./TimeToggle2";
+import React, { useState, useEffect } from 'react';
 
 export default function SecondPage ({ route, navigation }) {
+
+  const entryTime = 7 * 60; // 7:00 AM in minutes
+  const [entryTimeLength, setEntryTimeLength] = useState(entryTime);
+  const [isSessionActive, setIsSessionActive] = useState(false);
+  const [period, setPeriod] = useState('AM')
+  const [timer, setTimer] = useState(null);
+
+  //AM and Pm toggle
+  const periodToggle = () => {
+    setPeriod(period === 'AM' ? 'PM' : 'AM');
+  }
+
+  // Format the time in "hh:mm AM/PM" format
+  const formatTime = (timeInMinutes) => {
+    const hours = Math.floor(timeInMinutes / 60);
+    const formattedHours = (hours % 12 || 12).toString(); // Display 12-hour time format
+    
+
+    // Calculate the minutes separately and pad them with leading zeros
+    const formattedMinutes = (timeInMinutes % 60).toString().padStart(2, '0');
+
+    return `${formattedHours}:${formattedMinutes}`;
+  };
+
+  const incremententryTimeLength = () => {
+    if (!isSessionActive && entryTimeLength < 720) {
+      setEntryTimeLength((preventryTimeLength) => preventryTimeLength + 30);
+    }
+  };
+
+  const decremententryTimeLength = () => {
+    if (!isSessionActive && entryTimeLength > 60) {
+      setEntryTimeLength((preventryTimeLength) => preventryTimeLength - 30);
+    }
+  };
+
+  useEffect(() => {
+    if (entryTimeLength === 0) {
+      // Session has ended
+      clearInterval(timer);
+      // You can add a sound or notification for session completion here
+    }
+  }, [entryTimeLength, timer]);
+
 
   const {name} = route.params;
 
   const onPressControl = () => {
-    navigation.navigate('ThirdPage')
+    navigation.navigate('ThirdPage', {time: entryTimeLength, period: period, name:name})
   }
+  console.log(period)
 
   return(
     <ScrollView style={styles.scrollView}>
@@ -27,8 +71,23 @@ export default function SecondPage ({ route, navigation }) {
             <Text style={styles.timeHeadingText}>ENTRY TIME</Text>
           </View>
         </View>
-        <View>
-          <SessionTimer/>
+        <View style={timerStyles.container}>
+          <View style={timerStyles.buttonsContainer}>
+            <TouchableOpacity onPress={decremententryTimeLength} style={timerStyles.button}>
+              <Text style={timerStyles.buttonText}>-</Text>
+            </TouchableOpacity>
+            <View style={timerStyles.timerContainer}>
+              <Text style={timerStyles.timer}>{formatTime(entryTimeLength)}</Text>
+            </View>
+            <TouchableOpacity onPress={incremententryTimeLength} style={timerStyles.button}>
+              <Text style={timerStyles.buttonText}>+</Text>
+            </TouchableOpacity>
+            <View style={timerStyles.periodContainer}>
+              <TouchableOpacity onPress={periodToggle}>
+                <Text style={timerStyles.periodText}>{period}</Text>
+              </TouchableOpacity>
+            </View>
+          </View>
         </View>
         {/* <View style={styles.timeHeadingAlign}>
           <View style={styles.timeHeadingContainer}>
@@ -163,3 +222,51 @@ const styles = StyleSheet.create({
     color: '#fff',
   }
 })
+
+const timerStyles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  periodContainer: {
+    backgroundColor: '#264259',
+    paddingHorizontal: 10,
+    paddingVertical: 10,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 5,
+    margin: 20,
+  },
+  periodText: {
+    color: '#fff',
+    fontSize: 24
+  },
+  timerContainer: {
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  timer: {
+    fontSize: 36,
+    backgroundColor: '#264259',
+    color: '#fff',
+    width: 171,
+    textAlign: 'center',
+  },
+  buttonsContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
+  button: {
+    backgroundColor: '#fff',
+    paddingHorizontal: 20,
+    paddingVertical: 10,
+    borderRadius: 5,
+  },
+  buttonText: {
+    color: '#264259',
+    fontSize: 24,
+  },
+  // ...
+});
