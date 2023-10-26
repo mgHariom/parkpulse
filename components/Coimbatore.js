@@ -62,7 +62,7 @@ export default function Coimbatore ({navigation, route}){
                 navigation.navigate(item.value);
               }}
             />
-            <TouchableOpacity onPress={() => navigation.navigate('SecondPage', { name: 'Brookefields' })}>
+            <TouchableOpacity onPress={() => navigation.navigate('SecondPage', { name: 'Brookfields' })}>
                 <Image 
                     source={require('./image/coimbatore/brookfields_image.png')}
                     style={styles.img}    

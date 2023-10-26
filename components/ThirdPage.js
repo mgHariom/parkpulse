@@ -26,14 +26,26 @@ const SeatSelection = ({navigation, route}) => {
   const [seatData, setSeatData] = useState(generateSeatData());
   const [selectedSeats, setSelectedSeats] = useState([]);
 
+  // Define a state variable to track whether a seat is selected
+  const [isSeatSelected, setIsSeatSelected] = React.useState(false);
+
+  // const handleSeatSelection = () => {
+  //   // Simulate seat selection, you should implement this logic according to your app
+  //   setIsSeatSelected(true);
+  // };
+
+  console.log(isSeatSelected)
+
   const toggleSeatSelection = (seatId) => {
     const updatedSeatData = seatData.map((seat) => {
       if (seat.id === seatId) {
+        setIsSeatSelected(true)
         return {
           ...seat,
           status: seat.status === 'available' ? 'selected' : 'available',
         };
       } else if (seat.status === 'selected') {
+        // setIsSeatSelected(false)
         // Deselect the previously selected seat
         return {
           ...seat,
@@ -48,18 +60,28 @@ const SeatSelection = ({navigation, route}) => {
   
     setSeatData(updatedSeatData);
   };
-  
 
   const handleConfirmBooking = () => {
-    const newlySelectedSeats = seatData.filter((seat) => seat.status === 'selected');
-    setSelectedSeats(newlySelectedSeats);
+    if (isSeatSelected) {
+      // Seats are selected
+      setIsSeatSelected(true)
+      const newlySelectedSeats = seatData.filter((seat) => seat.status === 'selected');
+      setSelectedSeats(newlySelectedSeats);
+      console.log(newlySelectedSeats);
   
-    console.log(newlySelectedSeats);
-
-   navigation.navigate('Ticketpage', {data : newlySelectedSeats, time: time, period:period, name:name, date: date});
+      navigation.navigate('Ticketpage', {
+        data: newlySelectedSeats,
+        time: time,
+        period: period,
+        name: name,
+        date: date,
+      });
+      console.log('Booking confirmed');
+    } else {
+      // Handle the case when no seat is selected
+      console.log('Please select a seat before confirming booking.');
+    }
   };
-
-  
 
   return (
     <ScrollView style={styles.scrollView}>
@@ -99,7 +121,7 @@ const SeatSelection = ({navigation, route}) => {
       </View>
 
 
-      <TouchableOpacity onPress={handleConfirmBooking} style={styles.confirmButton}>
+      <TouchableOpacity onPress={handleConfirmBooking} style={[styles.confirmButton, { backgroundColor: isSeatSelected ? '#264259' : '#ccc'}]}>
         <Text style={styles.confirmButtonText}>Confirm Booking</Text>
       </TouchableOpacity>
     </View>
@@ -147,6 +169,7 @@ const styles = StyleSheet.create({
   seatingArrangement: {
     justifyContent: 'center',
     alignItems: 'center',
+    marginTop: 50,
   },
   row: {
     flexDirection: 'row',

@@ -96,7 +96,7 @@ export default function SecondPage ({ route, navigation }) {
             key={day.toISOString()}
             onPress={() => handleDateSelection(day)}
             style={{
-              flexBasis: '18%',
+              flexBasis: '20%',
               alignItems: 'center',
               padding: 5,
             }}
@@ -104,8 +104,7 @@ export default function SecondPage ({ route, navigation }) {
             <View
               style={[
                 calendarStyles.dateContainer,
-                isSameDay(day, selectedDate) && calendarStyles.selectedDateContainer,
-                isSameDay(day, currentDate) && calendarStyles.currentDateContainer,
+                isSameDay(day, selectedDate) && calendarStyles.selectedDateContainer
               ]}
             >
               <Text style={calendarStyles.dateText}>{getDate(day)}</Text>
@@ -175,7 +174,7 @@ export default function SecondPage ({ route, navigation }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#d8f0fa'
+    backgroundColor: '#d8f0fa',
   },
 
   scrollView: {
@@ -344,11 +343,10 @@ const calendarStyles = StyleSheet.create({
   dateContainer: {
     justifyContent: 'center',
     alignItems: 'center',
-    padding: 10,
     backgroundColor: '#264259',
     borderRadius: 8,
     width: 50,
-    height: 80,
+    padding: 10
   },
   dateText: {
     color: '#fff',
@@ -363,9 +361,9 @@ const calendarStyles = StyleSheet.create({
   selectedDateText: {
     color: '#fff',
   },
-//   currentDateContainer: {
-//     backgroundColor: '#e74c3c',
-//   },
+  // currentDateContainer: {
+  //   backgroundColor: '#45a7f7',
+  // },
 //   currentDateText: {
 //     color: '#fff',
 //   },

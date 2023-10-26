@@ -45,7 +45,7 @@ export default function Home ({navigation, route}){
           <View style = {styles.container_img}>
             <Dropdown
           style={[styles.dropdown, isFocus && { borderColor: 'blue' }]}
-          placeholder={!isFocus ? 'Select a city' : ''}
+          placeholder={!isFocus ? 'Most Visited Malls' : ''}
           placeholderStyle={styles.placeholderStyle}
           selectedTextStyle={styles.selectedTextStyle}
           iconStyle={styles.iconStyle}
@@ -139,6 +139,7 @@ const styles = StyleSheet.create({
     },
     placeholderStyle: {
           fontSize: 16,
+          opacity: 0.4
     },
     selectedTextStyle: {
           fontSize: 16,
