@@ -10,8 +10,8 @@ import Home from './components/Home';
 import TimeToggle from './components/TimeToggle';
 import ThirdPage from './components/ThirdPage';
 import Ticketpage from './components/Ticketpage';
-import { FontAwesome } from '@expo/vector-icons';
 import {AiOutlineArrowLeft} from 'react-icons/ai'
+import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 
 export default function App() {
@@ -52,10 +52,10 @@ function MyStack() {
       <Stack.Screen
         name="Ticketpage"
         component={Ticketpage}
-        options={{
+        options={ {
           headerLeft: () => (
-            <IconButton
-              icon={<aiOutlineArrowLeft />}
+            <MaterialCommunityIcons
+              icon= "arrow-left"
               color="#000"
               size={20}
               onPress={() => navigation.navigate('Home')}

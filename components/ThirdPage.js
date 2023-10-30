@@ -17,7 +17,7 @@ const SeatSelection = ({navigation, route}) => {
     for (let row = 1; row <= numRows; row++) {
       for (let col = 1; col <= numCols; col++) {
         const seatId = `${String.fromCharCode(64 + row)}-${col}`;
-        seats.push({ id: seatId, status: 'available' });
+        seats.push({ id: seatId, status: 'available', availability: true });
       }
     }
     return seats;
@@ -39,27 +39,22 @@ const SeatSelection = ({navigation, route}) => {
   const toggleSeatSelection = (seatId) => {
     const updatedSeatData = seatData.map((seat) => {
       if (seat.id === seatId) {
-        setIsSeatSelected(true)
         return {
           ...seat,
-          status: seat.status === 'available' ? 'selected' : 'available',
-        };
-      } else if (seat.status === 'selected') {
-        // setIsSeatSelected(false)
-        // Deselect the previously selected seat
-        return {
-          ...seat,
-          status: 'available',
+          availability: !seat.availability, // Toggle availability
+          status: seat.availability ? 'selected' : 'available',
         };
       }
       return seat;
     });
-  
-    const newlySelectedSeat = updatedSeatData.find((seat) => seat.status === 'selected');
-    setSelectedSeats(newlySelectedSeat ? [newlySelectedSeat] : []);
-  
     setSeatData(updatedSeatData);
-  };
+  }
+  
+  
+    // const newlySelectedSeat = updatedSeatData.find((seat) => seat.status === 'selected');
+    // setSelectedSeats(newlySelectedSeat ? [newlySelectedSeat] : []);
+  
+    // setSeatData(updatedSeatData);
 
   const handleConfirmBooking = () => {
     if (isSeatSelected) {
@@ -105,15 +100,20 @@ const SeatSelection = ({navigation, route}) => {
                   style={[
                     styles.seat,
                     {
-                      backgroundColor: seat.status === 'selected' ? '#264259' : '#d8f0fa',
+                      backgroundColor:
+                        seat.availability === false ? 'red' : // Booked seats
+                        seat.status === 'selected' ? '#264259' : '#d8f0fa', // Selected or available
                       borderColor: seat.status === 'selected' ? '#fff' : '#264259',
                       marginRight: colIndex < numCols - 1 ? columnSpacing : 0,
                     },
                   ]}
                   onPress={() => toggleSeatSelection(seat.id)}
                 >
-                  <Text style={[styles.seatText, {color: seat.status === 'selected' ? '#fff' : '#264259',}]}>{seat.id}</Text>
+                  <Text style={[styles.seatText, { color: seat.availability === false ? 'white' : seat.status === 'selected' ? '#fff' : '#264259' }]}>
+                    {seat.id}
+                  </Text>
                 </TouchableOpacity>
+
               );
             })}
           </View>
@@ -128,6 +128,7 @@ const SeatSelection = ({navigation, route}) => {
     </ScrollView>
   );
 };
+  
 
 const headerStyle = StyleSheet.create({
 
