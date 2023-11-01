@@ -1,68 +1,88 @@
 import React, { useState } from 'react';
-import { View, StyleSheet, TouchableOpacity, Text} from 'react-native';
+import { View, StyleSheet, TouchableOpacity, Text } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 
-const SeatSelection = ({navigation, route}) => {
-
-  const {time, period, name, date} = route.params
-
-  console.log(period);
+const SeatSelection = ({ navigation, route }) => {
+  const { time, period, name, date } = route.params;
 
   const numRows = 4;
-  const numCols = 3; // Updated to 3 columns
-  const columnSpacing = 10; // Adjust the spacing as needed
+  const numCols = 3;
+  const columnSpacing = 10;
 
   const generateSeatData = () => {
     const seats = [];
     for (let row = 1; row <= numRows; row++) {
       for (let col = 1; col <= numCols; col++) {
         const seatId = `${String.fromCharCode(64 + row)}-${col}`;
-        seats.push({ id: seatId, status: 'available', availability: true });
+        seats.push({ id: seatId, status: 'available', availability: true, bookingStatus: 'available' });
       }
     }
     return seats;
   };
 
-  const [seatData, setSeatData] = useState(generateSeatData());
+  const [seatData, setSeatData] = useState(generateSeatData);
   const [selectedSeats, setSelectedSeats] = useState([]);
-
-  // Define a state variable to track whether a seat is selected
   const [isSeatSelected, setIsSeatSelected] = React.useState(false);
 
-  // const handleSeatSelection = () => {
-  //   // Simulate seat selection, you should implement this logic according to your app
-  //   setIsSeatSelected(true);
-  // };
-
-  console.log(isSeatSelected)
+  console.log(selectedSeats);
 
   const toggleSeatSelection = (seatId) => {
+    if (isSeatBooked(seatId)) return;
+
     const updatedSeatData = seatData.map((seat) => {
       if (seat.id === seatId) {
         return {
           ...seat,
-          availability: !seat.availability, // Toggle availability
+          availability: !seat.availability,
           status: seat.availability ? 'selected' : 'available',
         };
       }
       return seat;
     });
     setSeatData(updatedSeatData);
-  }
-  
-  
-    // const newlySelectedSeat = updatedSeatData.find((seat) => seat.status === 'selected');
-    // setSelectedSeats(newlySelectedSeat ? [newlySelectedSeat] : []);
-  
-    // setSeatData(updatedSeatData);
+
+    // Check if at least one seat is selected
+    const selected = updatedSeatData.some((seat) => seat.status === 'selected');
+    setIsSeatSelected(selected);
+  };
+
+  const bookSeat = (seatId) => {
+    const updatedSeatData = seatData.map((seat) => {
+      if (seat.id === seatId) {
+        return {
+          ...seat,
+          availability: false, // Mark the seat as booked
+          status: 'booked', // Set the status to 'booked'
+          bookingStatus: 'booked'
+        };
+      }
+      return seat;
+    });
+    setSeatData(updatedSeatData);
+  };
+
+  const isSeatBooked = (seatId) => {
+    const seat = seatData.find((seat) => seat.id === seatId);
+    return seat.bookingStatus === 'booked';
+  };
 
   const handleConfirmBooking = () => {
-    if (isSeatSelected) {
-      // Seats are selected
-      setIsSeatSelected(true)
-      const newlySelectedSeats = seatData.filter((seat) => seat.status === 'selected');
-      setSelectedSeats(newlySelectedSeats);
-      console.log(newlySelectedSeats);
+    const newlySelectedSeats = seatData.filter((seat) => seat.status === 'selected');
+    setSelectedSeats(newlySelectedSeats);
+    const hasBookedSeats = newlySelectedSeats.some((seat) => seat.availability === true);
+  
+    if (hasBookedSeats) {
+      // Handle the case when there are booked seats
+      console.log('Please select only available seats.');
+    } else if (newlySelectedSeats.length === 0) {
+      // Handle the case when no seat is selected
+      console.log('Please select a seat before confirming booking.');
+    } else {
+      // Seats are selected and all are available
+      setIsSeatSelected(true);
+  
+      // Call bookSeat function here to mark the selected seats as booked
+      newlySelectedSeats.forEach((seat) => bookSeat(seat.id));
   
       navigation.navigate('Ticketpage', {
         data: newlySelectedSeats,
@@ -72,75 +92,88 @@ const SeatSelection = ({navigation, route}) => {
         date: date,
       });
       console.log('Booking confirmed');
-    } else {
-      // Handle the case when no seat is selected
-      console.log('Please select a seat before confirming booking.');
     }
+    console.log(newlySelectedSeats);
   };
+  
 
   return (
     <ScrollView style={styles.scrollView}>
       <View style={styles.container}>
-      <View style={headerStyle.container}>
-        <View style={headerStyle.mallContainerAlign}>
-          <View style={headerStyle.mallContainer}>
-            <Text style={headerStyle.mallText}>{name}</Text>
+        <View style={headerStyle.container}>
+          <View style={headerStyle.mallContainerAlign}>
+            <View style={headerStyle.mallContainer}>
+              <Text style={headerStyle.mallText}>{name}</Text>
+            </View>
           </View>
         </View>
+        <View style={styles.seatingArrangement}>
+          {Array.from({ length: numRows }, (_, rowIndex) => (
+            <View key={rowIndex} style={styles.row}>
+              {Array.from({ length: numCols }, (_, colIndex) => {
+                const seatIndex = rowIndex * numCols + colIndex;
+                const seat = seatData[seatIndex];
+                return (
+                  <TouchableOpacity
+                    key={seat.id}
+                    style={[
+                      styles.seat,
+                      {
+                        backgroundColor:
+                          seat.bookingStatus === 'booked'
+                            ? 'red'
+                            : seat.availability === false
+                            ? 'blue'
+                            : seat.status === 'selected'
+                            ? '#264259'
+                            : '#d8f0fa',
+                        borderColor: seat.status === 'selected' ? '#fff' : '#264259',
+                        marginRight: colIndex < numCols - 1 ? columnSpacing : 0,
+                      },
+                    ]}
+                    onPress={() => toggleSeatSelection(seat.id)}
+                    disabled={seat.bookingStatus === 'booked'}
+                  >
+                    <Text
+                      style={[
+                        styles.seatText,
+                        { color: seat.bookingStatus === 'booked' ? 'white' : seat.status === 'selected' ? '#fff' : '#264259' },
+                      ]}
+                    >
+                      {seat.id}
+                    </Text>
+                  </TouchableOpacity>
+                );
+              })}
+            </View>
+          ))}
+        </View>
+
+        <TouchableOpacity
+          onPress={handleConfirmBooking}
+          style={[
+            styles.confirmButton,
+            {
+              backgroundColor: isSeatSelected ? '#264259' : '#ccc',
+            }
+          ]}
+          disabled={!isSeatSelected} // Disable button when no seat is selected
+        >
+          <Text style={styles.confirmButtonText}>Confirm Booking</Text>
+        </TouchableOpacity>
       </View>
-      <View style={styles.seatingArrangement}>
-        {Array.from({ length: numRows }, (_, rowIndex) => (
-          <View key={rowIndex} style={styles.row}>
-            {Array.from({ length: numCols }, (_, colIndex) => {
-              const seatIndex = rowIndex * numCols + colIndex;
-              const seat = seatData[seatIndex];
-              return (
-                <TouchableOpacity
-                  key={seat.id}
-                  style={[
-                    styles.seat,
-                    {
-                      backgroundColor:
-                        seat.availability === false ? 'red' : // Booked seats
-                        seat.status === 'selected' ? '#264259' : '#d8f0fa', // Selected or available
-                      borderColor: seat.status === 'selected' ? '#fff' : '#264259',
-                      marginRight: colIndex < numCols - 1 ? columnSpacing : 0,
-                    },
-                  ]}
-                  onPress={() => toggleSeatSelection(seat.id)}
-                >
-                  <Text style={[styles.seatText, { color: seat.availability === false ? 'white' : seat.status === 'selected' ? '#fff' : '#264259' }]}>
-                    {seat.id}
-                  </Text>
-                </TouchableOpacity>
-
-              );
-            })}
-          </View>
-        ))}
-      </View>
-
-
-      <TouchableOpacity onPress={handleConfirmBooking} style={[styles.confirmButton, { backgroundColor: isSeatSelected ? '#264259' : '#ccc'}]}>
-        <Text style={styles.confirmButtonText}>Confirm Booking</Text>
-      </TouchableOpacity>
-    </View>
     </ScrollView>
   );
 };
-  
 
 const headerStyle = StyleSheet.create({
-
   container: {
     flex: 0.4,
-    backgroundColor: '#d8f0fa'
+    backgroundColor: '#d8f0fa',
   },
-
   mallContainerAlign: {
     alignItems: 'center',
   },
-
   mallContainer: {
     width: 279,
     height: 35,
@@ -150,13 +183,12 @@ const headerStyle = StyleSheet.create({
     alignContent: 'center',
     alignItems: 'center',
   },
-
   mallText: {
     color: '#000',
     fontSize: 20,
     fontWeight: '500',
   },
-})
+});
 
 const styles = StyleSheet.create({
   scrollView: {
@@ -187,9 +219,6 @@ const styles = StyleSheet.create({
   seatText: {
     fontSize: 16,
   },
-  selectedSeats: {
-    marginTop: 20,
-  },
   confirmButton: {
     marginTop: 50,
     backgroundColor: '#264259',
@@ -198,24 +227,13 @@ const styles = StyleSheet.create({
     height: 50,
     justifyContent: 'center',
     alignItems: 'center',
-    borderRadius: 50
+    borderRadius: 50,
   },
-  confirmButtonText:{
+  confirmButtonText: {
     fontSize: 20,
     fontWeight: 'bold',
-    color: '#fff'
+    color: '#fff',
   },
-  selectedSeatsText: {
-    fontSize: 16,
-    fontWeight: 'bold',
-    color: '#264259',
-  },
-  selectedSeat: {
-    fontSize: 16,
-    color: '#264259',
-    fontWeight: 'bold',
-  },
-  
 });
 
 export default SeatSelection;

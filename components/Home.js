@@ -107,6 +107,15 @@ export default function Home ({navigation, route}){
     )
 }
 
+Home.navigationOptions = {
+  headerTitle: () => (
+    <Image
+      source={require('../assets/logo.png')} // Replace with the path to your logo image
+      style={{ width: 150, height: 30 }} // Adjust the width and height as needed
+    />
+  ),
+};
+
 const styles = StyleSheet.create({
     container_img:    {
         flex: 1,

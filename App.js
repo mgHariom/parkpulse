@@ -1,5 +1,5 @@
 import 'react-native-gesture-handler';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, Image } from 'react-native';
 import { createStackNavigator } from '@react-navigation/stack';
 import {NavigationContainer} from '@react-navigation/native';
 import Coimbatore from './components/Coimbatore';
@@ -29,25 +29,74 @@ const Stack = createStackNavigator();
 function MyStack() {
   return (
     <Stack.Navigator 
+    initialRouteName='Home'
     screenOptions={{
       headerStyle: {
-        backgroundColor: '#d8f0fa',
+        backgroundColor: '#264259',
         height: 80,
         
       },
       headerTintColor: '#000',
       headerTitleStyle: {
         fontWeight: 'bold',
-        color: '#d8f0fa'
+        //color: '#d8f0fa'
       },
     }}
     >
-      <Stack.Screen name="Home" component={Home}/>
-      <Stack.Screen name="Coimbatore" component={Coimbatore}/>
-      <Stack.Screen name="Chennai" component={Chennai} />
-      <Stack.Screen name="Bangalore" component={Bangalore} />
-      <Stack.Screen name="SecondPage" component={second_page} />
-      <Stack.Screen name="TimeToggle" component={TimeToggle} />
+      <Stack.Screen name="Home" component={Home} 
+      options={{
+        headerTitle: () => (
+          <Image
+            source={require('./assets/logo.png')} // Replace with the path to your logo image
+            style={{ width: 150, height: 30 }} // Adjust the width and height as needed
+          />
+        ),
+      }}/>
+      <Stack.Screen name="Coimbatore" component={Coimbatore}
+      options={{
+        headerTitle: () => (
+          <Image
+            source={require('./assets/logo.png')} // Replace with the path to your logo image
+            style={{ width: 150, height: 30 }} // Adjust the width and height as needed
+          />
+        ),
+      }}/>
+      <Stack.Screen name="Chennai" component={Chennai} 
+      options={{
+        headerTitle: () => (
+          <Image
+            source={require('./assets/logo.png')} // Replace with the path to your logo image
+            style={{ width: 150, height: 30 }} // Adjust the width and height as needed
+          />
+        ),
+      }}/>
+      <Stack.Screen name="Bangalore" component={Bangalore} 
+      options={{
+        headerTitle: () => (
+          <Image
+            source={require('./assets/logo.png')} // Replace with the path to your logo image
+            style={{ width: 150, height: 30 }} // Adjust the width and height as needed
+          />
+        ),
+      }}/>
+      <Stack.Screen name="SecondPage" component={second_page} 
+      options={{
+        headerTitle: () => (
+          <Image
+            source={require('./assets/logo.png')} // Replace with the path to your logo image
+            style={{ width: 150, height: 30 }} // Adjust the width and height as needed
+          />
+        ),
+      }}/>
+      <Stack.Screen name="TimeToggle" component={TimeToggle} 
+      options={{
+        headerTitle: () => (
+          <Image
+            source={require('./assets/logo.png')} // Replace with the path to your logo image
+            style={{ width: 150, height: 30 }} // Adjust the width and height as needed
+          />
+        ),
+      }}/>
       <Stack.Screen name="ThirdPage" component={ThirdPage} />
       <Stack.Screen
         name="Ticketpage"
@@ -55,15 +104,22 @@ function MyStack() {
         options={ {
           headerLeft: () => (
             <MaterialCommunityIcons
-              icon= "arrow-left"
-              color="#000"
+              name="arrow-left" // Change 'icon' to 'name'
+              color="#264259"
               size={20}
-              onPress={() => navigation.navigate('Home')}
+              onPress={({navigation}) => navigation.navigate('Home')}
               style={{ marginLeft: 15 }}
+            />
+          ),
+          headerTitle: () => (
+            <Image
+              source={require('./assets/logo.png')} // Replace with the path to your logo image
+              style={{ width: 150, height: 30 }} // Adjust the width and height as needed
             />
           ),
         }}
       />
+
     </Stack.Navigator>
   );
 }
