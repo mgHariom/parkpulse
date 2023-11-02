@@ -97,20 +97,28 @@ function MyStack() {
           />
         ),
       }}/>
-      <Stack.Screen name="ThirdPage" component={ThirdPage} />
+      <Stack.Screen name="ThirdPage" component={ThirdPage} 
+      options={{
+        headerTitle: () => (
+          <Image
+            source={require('./assets/logo.png')} // Replace with the path to your logo image
+            style={{ width: 150, height: 30 }} // Adjust the width and height as needed
+          />
+        ),
+      }}/>
       <Stack.Screen
         name="Ticketpage"
         component={Ticketpage}
         options={ {
-          headerLeft: () => (
-            <MaterialCommunityIcons
-              name="arrow-left" // Change 'icon' to 'name'
-              color="#264259"
-              size={20}
-              onPress={({navigation}) => navigation.navigate('Home')}
-              style={{ marginLeft: 15 }}
-            />
-          ),
+          // headerLeft: () => (
+          //   <MaterialCommunityIcons
+          //     name="arrow-left" // Change 'icon' to 'name'
+          //     color="#000"
+          //     size={20}
+          //     //onPress={({navigation}) => navigation.navigate('Home')}
+          //     style={{ marginLeft: 15 }}
+          //   />
+          // ),
           headerTitle: () => (
             <Image
               source={require('./assets/logo.png')} // Replace with the path to your logo image

@@ -1,5 +1,4 @@
 import { View, Text, StyleSheet, ScrollView, Pressable, TouchableOpacity } from "react-native";
-import Calendar from "./Calendar";
 import React, { useState, useEffect } from 'react';
 import { startOfMonth, endOfMonth, eachDayOfInterval, format, getDate, addDays, isSameDay, getDay,  } from 'date-fns';
 
@@ -15,8 +14,10 @@ export default function SecondPage ({ route, navigation }) {
 
   const [currentMonth, setCurrentMonth] = useState(new Date());
   const [selectedDate, setSelectedDate] = useState(null);
+  const [selected, setSelected] = useState(false)
   console.log(selectedDate)
   const handleDateSelection = (date) => {
+    setSelected(true)
     setSelectedDate(date);
   };
 
@@ -161,7 +162,7 @@ export default function SecondPage ({ route, navigation }) {
         </View>
         <View style={styles.slotBookerAlign}>
             <View>
-              <TouchableOpacity onPress={onPressControl}  style={styles.slotBookercontainer}>
+              <TouchableOpacity onPress={onPressControl}  style={[styles.slotBookercontainer, {backgroundColor: selected ? '#264259' : '#ccc'}]} disabled={!selected}>
                 <Text style={styles.slotBookerText}>BOOK A SLOT</Text>
               </TouchableOpacity>
             </View>
@@ -175,10 +176,12 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#d8f0fa',
+    marginTop: 20,
   },
 
   scrollView: {
     backgroundColor: '#d8f0fa',
+    
   },
 
   mallContainerAlign: {

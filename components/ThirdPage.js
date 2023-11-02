@@ -26,6 +26,7 @@ const SeatSelection = ({ navigation, route }) => {
 
   console.log(selectedSeats);
 
+  
   const toggleSeatSelection = (seatId) => {
     if (isSeatBooked(seatId)) return;
 
@@ -34,7 +35,14 @@ const SeatSelection = ({ navigation, route }) => {
         return {
           ...seat,
           availability: !seat.availability,
-          status: seat.availability ? 'selected' : 'available',
+          status: 'selected',
+        };
+      } else if (seat.status === 'selected') {
+        // Clear the selection of the previously selected seat
+        return {
+          ...seat,
+          availability: true,
+          status: 'available',
         };
       }
       return seat;
