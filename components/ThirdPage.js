@@ -131,7 +131,7 @@ const SeatSelection = ({ navigation, route }) => {
                           seat.bookingStatus === 'booked'
                             ? 'red'
                             : seat.availability === false
-                            ? 'blue'
+                            ? '#264259'
                             : seat.status === 'selected'
                             ? '#264259'
                             : '#d8f0fa',

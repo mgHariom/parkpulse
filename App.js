@@ -12,6 +12,8 @@ import ThirdPage from './components/ThirdPage';
 import Ticketpage from './components/Ticketpage';
 import {AiOutlineArrowLeft} from 'react-icons/ai'
 import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { useNavigation } from '@react-navigation/native';
+
 
 
 export default function App() {
@@ -60,6 +62,7 @@ function MyStack() {
             style={{ width: 150, height: 30 }} // Adjust the width and height as needed
           />
         ),
+        headerLeft: () => null,
       }}/>
       <Stack.Screen name="Chennai" component={Chennai} 
       options={{
@@ -69,6 +72,7 @@ function MyStack() {
             style={{ width: 150, height: 30 }} // Adjust the width and height as needed
           />
         ),
+        headerLeft: () => null,
       }}/>
       <Stack.Screen name="Bangalore" component={Bangalore} 
       options={{
@@ -78,6 +82,7 @@ function MyStack() {
             style={{ width: 150, height: 30 }} // Adjust the width and height as needed
           />
         ),
+        headerLeft: () => null,
       }}/>
       <Stack.Screen name="SecondPage" component={second_page} 
       options={{
@@ -110,15 +115,18 @@ function MyStack() {
         name="Ticketpage"
         component={Ticketpage}
         options={ {
-          // headerLeft: () => (
-          //   <MaterialCommunityIcons
-          //     name="arrow-left" // Change 'icon' to 'name'
-          //     color="#000"
-          //     size={20}
-          //     //onPress={({navigation}) => navigation.navigate('Home')}
-          //     style={{ marginLeft: 15 }}
-          //   />
-          // ),
+          headerLeft: () => {
+            const navigation = useNavigation();
+            return (
+              <MaterialCommunityIcons
+                name="arrow-left"
+                color="#000"
+                size={20}
+                style={{ marginLeft: 15 }}
+                onPress={() => navigation.navigate('Home')}
+              />
+            );
+          },
           headerTitle: () => (
             <Image
               source={require('./assets/logo.png')} // Replace with the path to your logo image
