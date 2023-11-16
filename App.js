@@ -10,6 +10,7 @@ import Home from './components/Home';
 import TimeToggle from './components/TimeToggle';
 import ThirdPage from './components/ThirdPage';
 import Ticketpage from './components/Ticketpage';
+import LoginPage from './LoginPage';
 import {AiOutlineArrowLeft} from 'react-icons/ai'
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
@@ -31,7 +32,7 @@ const Stack = createStackNavigator();
 function MyStack() {
   return (
     <Stack.Navigator 
-    initialRouteName='Home'
+    initialRouteName='LoginPage'
     screenOptions={{
       headerStyle: {
         backgroundColor: '#264259',
@@ -45,6 +46,16 @@ function MyStack() {
       },
     }}
     >
+      <Stack.Screen name='LoginPage' component={LoginPage}
+      // options={{
+      //   headerTitle: () => (
+      //     <Image
+      //       source={require('./assets/logo.png')} // Replace with the path to your logo image
+      //       style={{ width: 150, height: 30 }} // Adjust the width and height as needed
+      //     />
+      //   ),
+      // }}
+      />
       <Stack.Screen name="Home" component={Home} 
       options={{
         headerTitle: () => (
