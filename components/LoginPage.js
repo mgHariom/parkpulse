@@ -1,8 +1,8 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import { Text, View, TouchableOpacity, TextInput, Alert, StyleSheet } from 'react-native';
 import firebase from 'firebase/app';
-import 'firebase/auth';
 import { Image } from "react-native";
+import { FirebaseConfig, auth, Firebase } from '../firebase';
 
 export default LoginPage = () => {
     const [phoneNumber, setPhoneNumber] = useState('');
@@ -15,37 +15,36 @@ export default LoginPage = () => {
     // const [shadowRadius, setShadowRadius] = useState(0);
     // const [shadowOpacity, setShadowOpacity] = useState(0.1);
 
+    // useEffect(() => {
+    //     // Check if Firebase is initialized
+    //     if (!auth) {
+    //       console.error("Firebase not initialized.");
+    //       // Handle the error or provide feedback to the user
+    //     }
+    //   }, []);
+
     const sendVerification = () => {
-        // Create a new instance of PhoneAuthProvider
-        const phoneProvider = new firebase.auth.PhoneAuthProvider();
-      
-        // Initiate phone number verification
-        phoneProvider
-          .verifyPhoneNumber(phoneNumber)
-          .then((verificationId) => {
-            // Set the verificationId in your component state or context
-            setVerificationId(verificationId);
-      
-            // Clear the phone number input field or reset the state
-            setPhoneNumber('');
-            
-            // Navigate to the OTP screen if needed
-            // navigation.navigate('Otp');
-          })
-          .catch((error) => {
-            // Handle any errors that occurred during verification
+        try {
+            const phoneProvider = new auth.PhoneAuthProvider();
+            const verificationId = phoneProvider.verifyPhoneNumber(
+              phoneNumber,
+              // Optional settings
+            );
+            // Save the verificationId to state or context for later use
+            console.log('Verification ID:', verificationId);
+          } catch (error) {
             console.error('Phone number verification error:', error);
-            // You might want to provide feedback to the user or log the error
-          });
+            Alert.alert('Error', 'Failed to send verification code');
+          }
       };
       
 
     const confirmCode = () => {
-        const credential = firebase.auth.PhoneAuthProvider.credential(
+        const credential = Firebase.auth.PhoneAuthProvider.credential(
             verificationId,
             code
         );
-        firebase.auth().signInWithCredential(credential)
+        Firebase.auth().signInWithCredential(credential)
             .then(() => {
                 setCode('');
                 Alert.alert('Login Successful');
