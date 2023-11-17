@@ -10,10 +10,12 @@ import Home from './components/Home';
 import TimeToggle from './components/TimeToggle';
 import ThirdPage from './components/ThirdPage';
 import Ticketpage from './components/Ticketpage';
-import LoginPage from './LoginPage';
+import LoginPage from './components/LoginPage';
+import Otp from './components/Otp'
 import {AiOutlineArrowLeft} from 'react-icons/ai'
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
+
 
 
 
@@ -35,7 +37,7 @@ function MyStack() {
     initialRouteName='LoginPage'
     screenOptions={{
       headerStyle: {
-        backgroundColor: '#264259',
+        backgroundColor: '#D8F0FA',
         height: 80,
         
       },
@@ -47,21 +49,36 @@ function MyStack() {
     }}
     >
       <Stack.Screen name='LoginPage' component={LoginPage}
-      // options={{
-      //   headerTitle: () => (
-      //     <Image
-      //       source={require('./assets/logo.png')} // Replace with the path to your logo image
-      //       style={{ width: 150, height: 30 }} // Adjust the width and height as needed
-      //     />
-      //   ),
-      // }}
+      options={{
+        headerTitle: () => (
+          <Image
+            source={require('./assets/logo3.png')} // Replace with the path to your logo image
+            style={{ flex:1, width: 200, height: "auto"}}
+            resizeMode="contain" // Adjust the width and height as needed
+          />
+        ),
+      }}
       />
+
+<Stack.Screen name='Otp' component={Otp}
+      options={{
+        headerTitle: () => (
+          <Image
+          source={require('./assets/logo3.png')} // Replace with the path to your logo image
+          style={{ flex:1, width: 200, height: "auto"}}
+          resizeMode="contain" // Adjust the width and height as needed
+          />
+        ),
+      }}
+      />
+
       <Stack.Screen name="Home" component={Home} 
       options={{
         headerTitle: () => (
           <Image
-            source={require('./assets/logo.png')} // Replace with the path to your logo image
-            style={{ width: 150, height: 30 }} // Adjust the width and height as needed
+          source={require('./assets/logo3.png')} // Replace with the path to your logo image
+          style={{ flex:1, width: 200, height: "auto"}}
+          resizeMode="contain" // Adjust the width and height as needed
           />
         ),
       }}/>
@@ -69,8 +86,9 @@ function MyStack() {
       options={{
         headerTitle: () => (
           <Image
-            source={require('./assets/logo.png')} // Replace with the path to your logo image
-            style={{ width: 150, height: 30 }} // Adjust the width and height as needed
+          source={require('./assets/logo3.png')} // Replace with the path to your logo image
+          style={{ flex:1, width: 200, height: "auto"}}
+          resizeMode="contain" // Adjust the width and height as needed
           />
         ),
         headerLeft: () => null,
@@ -79,8 +97,9 @@ function MyStack() {
       options={{
         headerTitle: () => (
           <Image
-            source={require('./assets/logo.png')} // Replace with the path to your logo image
-            style={{ width: 150, height: 30 }} // Adjust the width and height as needed
+          source={require('./assets/logo3.png')} // Replace with the path to your logo image
+          style={{ flex:1, width: 200, height: "auto"}}
+          resizeMode="contain" // Adjust the width and height as needed
           />
         ),
         headerLeft: () => null,
@@ -89,8 +108,9 @@ function MyStack() {
       options={{
         headerTitle: () => (
           <Image
-            source={require('./assets/logo.png')} // Replace with the path to your logo image
-            style={{ width: 150, height: 30 }} // Adjust the width and height as needed
+          source={require('./assets/logo3.png')} // Replace with the path to your logo image
+          style={{ flex:1, width: 200, height: "auto"}}
+          resizeMode="contain" // Adjust the width and height as needed
           />
         ),
         headerLeft: () => null,
@@ -99,8 +119,9 @@ function MyStack() {
       options={{
         headerTitle: () => (
           <Image
-            source={require('./assets/logo.png')} // Replace with the path to your logo image
-            style={{ width: 150, height: 30 }} // Adjust the width and height as needed
+          source={require('./assets/logo3.png')} // Replace with the path to your logo image
+          style={{ flex:1, width: 200, height: "auto"}}
+          resizeMode="contain" // Adjust the width and height as needed
           />
         ),
       }}/>
@@ -108,8 +129,9 @@ function MyStack() {
       options={{
         headerTitle: () => (
           <Image
-            source={require('./assets/logo.png')} // Replace with the path to your logo image
-            style={{ width: 150, height: 30 }} // Adjust the width and height as needed
+          source={require('./assets/logo3.png')} // Replace with the path to your logo image
+          style={{ flex:1, width: 200, height: "auto"}}
+          resizeMode="contain" // Adjust the width and height as needed
           />
         ),
       }}/>
@@ -117,8 +139,9 @@ function MyStack() {
       options={{
         headerTitle: () => (
           <Image
-            source={require('./assets/logo.png')} // Replace with the path to your logo image
-            style={{ width: 150, height: 30 }} // Adjust the width and height as needed
+          source={require('./assets/logo3.png')} // Replace with the path to your logo image
+          style={{ flex:1, width: 200, height: "auto"}}
+          resizeMode="contain" // Adjust the width and height as needed
           />
         ),
       }}/>

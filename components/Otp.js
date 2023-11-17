@@ -37,7 +37,7 @@ export default LoginPage = () => {
             <Text style={styles.otpText}>
                 Login using otp
             </Text>
-            <TextInput
+            {/* <TextInput
                 placeholder='Phone Number with Country Code'
                 onChangeText={setPhoneNumber}
                 keyboardType='phone-pad'
@@ -48,7 +48,7 @@ export default LoginPage = () => {
                 <Text style={styles.buttonText}>
                     Send Verification
                 </Text>
-            </TouchableOpacity>
+            </TouchableOpacity> */}
 
             <TextInput
                 placeholder='Confirm Code'
@@ -69,7 +69,7 @@ export default LoginPage = () => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#000',
+        backgroundColor: '#D8F0FA',
         alignItems: 'center',
         justifyContent: 'center',
     },
