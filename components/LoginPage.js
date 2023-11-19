@@ -1,59 +1,43 @@
-import React, { useRef, useState, useEffect } from 'react';
-import { Text, View, TouchableOpacity, TextInput, Alert, StyleSheet } from 'react-native';
-import firebase from 'firebase/app';
-import { Image } from "react-native";
-import { FirebaseConfig, auth, Firebase } from '../firebase';
+import React, { useState } from 'react';
+import { Text, View, TouchableOpacity, TextInput, Alert, StyleSheet, Image } from 'react-native';
+import { getAuth, signInWithPhoneNumber, PhoneAuthProvider, signInWithCredential } from 'firebase/auth';
+import { FirebaseConfig } from '../firebase';
 
-export default LoginPage = () => {
-    const [phoneNumber, setPhoneNumber] = useState('');
-    const [code, setCode] = useState('');
-    const [verificationId, setVerificationId] = useState(null);
+const LoginPage = () => {
+  const [phoneNumber, setPhoneNumber] = useState('');
+  const [code, setCode] = useState('');
+  const [verificationId, setVerificationId] = useState(null);
+  const [error, setError] = useState('');
 
+  const auth = getAuth();
 
-    // const [shadowOffsetWidth, setShadowOffsetWidth] = useState(0);
-    // const [shadowOffsetHeight, setShadowOffsetHeight] = useState(0);
-    // const [shadowRadius, setShadowRadius] = useState(0);
-    // const [shadowOpacity, setShadowOpacity] = useState(0.1);
+  const sendVerification = async () => {
+    console.log('phone number:', phoneNumber)
+    try {
+      // Request OTP using signInWithPhoneNumber
+      const confirmationResult = await signInWithPhoneNumber(auth, '+11234567890');
+      setVerificationId(confirmationResult.verificationId);
+      console.log(verificationId)
+      setError('');
+      console.log(confirmationResult.verificationId)
+    } catch (err) {
+      setError(err.message);
+    }
+  };
 
-    // useEffect(() => {
-    //     // Check if Firebase is initialized
-    //     if (!auth) {
-    //       console.error("Firebase not initialized.");
-    //       // Handle the error or provide feedback to the user
-    //     }
-    //   }, []);
-
-    const sendVerification = () => {
-        try {
-            const phoneProvider = new auth.PhoneAuthProvider();
-            const verificationId = phoneProvider.verifyPhoneNumber(
-              phoneNumber,
-              // Optional settings
-            );
-            // Save the verificationId to state or context for later use
-            console.log('Verification ID:', verificationId);
-          } catch (error) {
-            console.error('Phone number verification error:', error);
-            Alert.alert('Error', 'Failed to send verification code');
-          }
-      };
-      
-
-    const confirmCode = () => {
-        const credential = Firebase.auth.PhoneAuthProvider.credential(
-            verificationId,
-            code
-        );
-        Firebase.auth().signInWithCredential(credential)
-            .then(() => {
-                setCode('');
-                Alert.alert('Login Successful');
-            })
-            .catch((error) => {
-                // alert message
-                alert(error);
-            });
-    };
+  const confirmCode = () => {
+    const credential = PhoneAuthProvider.credential(verificationId, code);
+    signInWithCredential(auth, credential)
+      .then(() => {
+        setCode('');
+        Alert.alert('Login Successful');
+      })
+      .catch((error) => {
+        // alert message
+        console.log(error)
+        alert(error);
+      });
+  };
 
     return (
         <View style={styles.container}>
@@ -141,3 +125,5 @@ const styles = StyleSheet.create({
         paddingRight: 130,
     },
 });
+
+export default LoginPage;
