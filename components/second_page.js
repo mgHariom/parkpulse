@@ -1,6 +1,7 @@
 import { View, Text, StyleSheet, ScrollView, Pressable, TouchableOpacity } from "react-native";
 import React, { useState, useEffect } from 'react';
 import { startOfMonth, endOfMonth, eachDayOfInterval, format, getDate, addDays, isSameDay, getDay,  } from 'date-fns';
+import StripeApp from "./Stripe";
 
 
 
@@ -74,7 +75,7 @@ export default function SecondPage ({ route, navigation }) {
   const {name} = route.params;
 
   const onPressControl = () => {
-    navigation.navigate('ThirdPage', {time: entryTimeLength, period: period, name:name, date: selectedDate})
+    navigation.navigate('Stripe', {time: entryTimeLength, period: period, name:name, date: selectedDate})
   }
   console.log(period)
 

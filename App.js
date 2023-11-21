@@ -10,22 +10,23 @@ import Home from './components/Home';
 import TimeToggle from './components/TimeToggle';
 import ThirdPage from './components/ThirdPage';
 import Ticketpage from './components/Ticketpage';
-import LoginPage from './components/LoginPage';
-import Otp from './components/Otp'
+import StripeApp from './components/Stripe';
+//import LoginPage from './components/LoginPage';
+//import Otp from './components/Otp'
 import {AiOutlineArrowLeft} from 'react-icons/ai'
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
-
+import { StripeProvider } from "@stripe/stripe-react-native";
 
 
 
 export default function App() {
   return (
-    <NavigationContainer>
-      <MyStack>
-
-      </MyStack>
-    </NavigationContainer>
+    <StripeProvider publishableKey="pk_test_51N039nSCZ6AmyhC6k28I3v8t6hyeLrhAr039bb97W5R5GzoAbrKkHFSv1RcZsRAj8xr0hVsJ3K5RAwID0jakwzS200sOw1pjtQ">
+      <NavigationContainer>
+        <MyStack />
+      </NavigationContainer>
+    </StripeProvider>
   );
 }
 
@@ -34,7 +35,7 @@ const Stack = createStackNavigator();
 function MyStack() {
   return (
     <Stack.Navigator 
-    initialRouteName='LoginPage'
+    initialRouteName='Home'
     screenOptions={{
       headerStyle: {
         backgroundColor: '#D8F0FA',
@@ -48,31 +49,7 @@ function MyStack() {
       },
     }}
     >
-      <Stack.Screen name='LoginPage' component={LoginPage}
-      options={{
-        headerTitle: () => (
-          <Image
-            source={require('./assets/logo3.png')} // Replace with the path to your logo image
-            style={{ flex:1, width: 200, height: "auto"}}
-            resizeMode="contain" // Adjust the width and height as needed
-          />
-        ),
-      }}
-      />
-
-<Stack.Screen name='Otp' component={Otp}
-      options={{
-        headerTitle: () => (
-          <Image
-          source={require('./assets/logo3.png')} // Replace with the path to your logo image
-          style={{ flex:1, width: 200, height: "auto"}}
-          resizeMode="contain" // Adjust the width and height as needed
-          />
-        ),
-      }}
-      />
-
-      <Stack.Screen name="Home" component={Home} 
+    <Stack.Screen name="Home" component={Home} 
       options={{
         headerTitle: () => (
           <Image
@@ -82,7 +59,7 @@ function MyStack() {
           />
         ),
       }}/>
-      <Stack.Screen name="Coimbatore" component={Coimbatore}
+    <Stack.Screen name="Coimbatore" component={Coimbatore}
       options={{
         headerTitle: () => (
           <Image
@@ -93,7 +70,7 @@ function MyStack() {
         ),
         headerLeft: () => null,
       }}/>
-      <Stack.Screen name="Chennai" component={Chennai} 
+    <Stack.Screen name="Chennai" component={Chennai} 
       options={{
         headerTitle: () => (
           <Image
@@ -104,7 +81,7 @@ function MyStack() {
         ),
         headerLeft: () => null,
       }}/>
-      <Stack.Screen name="Bangalore" component={Bangalore} 
+    <Stack.Screen name="Bangalore" component={Bangalore} 
       options={{
         headerTitle: () => (
           <Image
@@ -115,7 +92,7 @@ function MyStack() {
         ),
         headerLeft: () => null,
       }}/>
-      <Stack.Screen name="SecondPage" component={second_page} 
+    <Stack.Screen name="SecondPage" component={second_page} 
       options={{
         headerTitle: () => (
           <Image
@@ -125,7 +102,7 @@ function MyStack() {
           />
         ),
       }}/>
-      <Stack.Screen name="TimeToggle" component={TimeToggle} 
+    <Stack.Screen name="TimeToggle" component={TimeToggle} 
       options={{
         headerTitle: () => (
           <Image
@@ -135,7 +112,7 @@ function MyStack() {
           />
         ),
       }}/>
-      <Stack.Screen name="ThirdPage" component={ThirdPage} 
+      {/* <Stack.Screen name="ThirdPage" component={ThirdPage} 
       options={{
         headerTitle: () => (
           <Image
@@ -165,6 +142,19 @@ function MyStack() {
             <Image
               source={require('./assets/logo.png')} // Replace with the path to your logo image
               style={{ width: 150, height: 30 }} // Adjust the width and height as needed
+            />
+          ),
+        }}
+      /> */}
+      <Stack.Screen 
+        name="Stripe" 
+        component={StripeApp} 
+        options={{
+          headerTitle: () => (
+            <Image
+              source={require('./assets/logo3.png')}
+              style={{ flex: 1, width: 200, height: 'auto' }}
+              resizeMode="contain"
             />
           ),
         }}
