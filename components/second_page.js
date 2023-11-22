@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet, ScrollView, Pressable, TouchableOpacity } from "react-native";
+import { View, Text, StyleSheet, ScrollView, Image, TouchableOpacity } from "react-native";
 import React, { useState, useEffect } from 'react';
 import { startOfMonth, endOfMonth, eachDayOfInterval, format, getDate, addDays, isSameDay, getDay,  } from 'date-fns';
 import StripeApp from "./Stripe";
@@ -109,8 +109,8 @@ export default function SecondPage ({ route, navigation }) {
                 isSameDay(day, selectedDate) && calendarStyles.selectedDateContainer
               ]}
             >
-              <Text style={calendarStyles.dateText}>{getDate(day)}</Text>
               <Text style={calendarStyles.dayText}>{dayNames[getDay(day)]}</Text>
+              <Text style={calendarStyles.dateText}>{getDate(day)}</Text>
             </View>
           </TouchableOpacity>
         ))}
@@ -119,13 +119,13 @@ export default function SecondPage ({ route, navigation }) {
         </View>
         <View style={styles.timeHeadingAlign}>
           <View style={styles.timeHeadingContainer}>
-            <Text style={styles.timeHeadingText}>ENTRY TIME</Text>
+            <Text style={styles.timeHeadingText}>ENTRY</Text>
           </View>
         </View>
         <View style={timerStyles.container}>
           <View style={timerStyles.buttonsContainer}>
             <TouchableOpacity onPress={decremententryTimeLength} style={timerStyles.button}>
-              <Text style={timerStyles.buttonText}>-</Text>
+              <Text style={timerStyles.buttonText}>--</Text>
             </TouchableOpacity>
             <View style={timerStyles.timerContainer}>
               <Text style={timerStyles.timer}>{formatTime(entryTimeLength)}</Text>
@@ -140,34 +140,16 @@ export default function SecondPage ({ route, navigation }) {
             </View>
           </View>
         </View>
-        {/* <View style={styles.timeHeadingAlign}>
-          <View style={styles.timeHeadingContainer}>
-            <Text style={styles.timeHeadingText}>EXIT TIME</Text>
-          </View>
-        </View>
-        <View>
-          <SessionTimer2/>
-        </View> */}
-        <View style={styles.slotCheckerAlign}>
-          <View style={styles.slotCheckerContainer}>
-            <Text style={styles.slotCheckerText}>SLOTS AVAILABLE</Text>
-          </View>
-          <View style={styles.slotCounterAlign}>
-            <View style={styles.slotCounterContainer}>
-              <Text style={styles.slotCounterText}>12</Text>
-            </View>
-            {/* <View style={styles.slotCounterContainer}>
-              <Text style={styles.slotCounterText}>2</Text>
-            </View> */}
-          </View>
+        <View style={{ justifyContent: 'center', alignItems: 'center'}}>
+          <Image source={require('./image/gif/gif2.gif')} style={{ width: 450, height: 300}} />
         </View>
         <View style={styles.slotBookerAlign}>
             <View>
               <TouchableOpacity onPress={onPressControl}  style={[styles.slotBookercontainer, {backgroundColor: selected ? '#264259' : '#ccc'}]} disabled={!selected}>
-                <Text style={styles.slotBookerText}>BOOK A SLOT</Text>
+                <Text style={styles.slotBookerText}>BOOK SLOT</Text>
               </TouchableOpacity>
             </View>
-          </View>
+        </View>
       </View>
     </ScrollView>
   )
@@ -201,8 +183,9 @@ const styles = StyleSheet.create({
 
   mallText: {
     color: '#000',
-    fontSize: 20,
-    fontWeight: '500',
+    fontSize: 22,
+    fontWeight: '900',
+    textTransform: 'uppercase'
   },
   timeHeadingAlign: {
     justifyContent: 'center',
@@ -212,14 +195,14 @@ const styles = StyleSheet.create({
   timeHeadingContainer: {
     backgroundColor: '#fff',
     width: 203,
-    height: 47,
+    height: 53,
     justifyContent: 'center',
     alignItems: 'center',
-    borderRadius: 50,
+    borderRadius: 30,
   }, 
   timeHeadingText: {
-    fontSize: 20,
-    fontWeight: '800',
+    fontSize: 22,
+    fontWeight: '900',
     color: '#264259',
   },
   slotCheckerAlign: {
@@ -281,11 +264,12 @@ const timerStyles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
+    marginTop: 0
   },
   periodContainer: {
     backgroundColor: '#264259',
-    paddingHorizontal: 10,
-    paddingVertical: 10,
+    paddingHorizontal: 11,
+    paddingVertical: 11,
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: 5,
@@ -293,17 +277,20 @@ const timerStyles = StyleSheet.create({
   },
   periodText: {
     color: '#fff',
-    fontSize: 24
+    fontSize: 17,
+    fontWeight: '600'
   },
   timerContainer: {
     justifyContent: 'center',
     alignItems: 'center'
   },
   timer: {
-    fontSize: 36,
+    fontSize:28,
+    fontWeight: '500',
     backgroundColor: '#264259',
     color: '#fff',
     width: 171,
+    height: 42,
     textAlign: 'center',
   },
   buttonsContainer: {
@@ -314,7 +301,7 @@ const timerStyles = StyleSheet.create({
   button: {
     backgroundColor: '#fff',
     paddingHorizontal: 20,
-    paddingVertical: 10,
+    paddingVertical: 6,
     borderRadius: 5,
   },
   buttonText: {
@@ -332,7 +319,7 @@ const calendarStyles = StyleSheet.create({
   month: {
     width: 200,
     height: 50,
-    borderRadius: 8,
+    borderRadius: 12,
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
@@ -341,23 +328,26 @@ const calendarStyles = StyleSheet.create({
   },
   monthText: {
     color: '#fff',
-    fontSize: 24,
-    fontWeight: '400',
+    fontSize: 21,
+    fontWeight: '700',
   },
   dateContainer: {
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#264259',
-    borderRadius: 8,
+    borderRadius: 12,
     width: 50,
     padding: 10
   },
   dateText: {
     color: '#fff',
     fontSize: 18,
+    fontWeight:'600'
   },
   dayText: {
     color: '#fff',
+    fontSize: 14,
+    fontWeight:'600'
   },
   selectedDateContainer: {
     backgroundColor: '#45a7f7',

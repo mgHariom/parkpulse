@@ -132,7 +132,7 @@ const styles = StyleSheet.create({
         height: 130, 
         width: 319.36,
         justifyContent: 'center',
-        borderRadius: 8,
+        borderRadius: 15,
         marginTop: 20
     },
 
@@ -147,15 +147,15 @@ const styles = StyleSheet.create({
           marginRight: 5,
     },
     placeholderStyle: {
-          fontSize: 16,
-          opacity: 0.4
+          fontSize: 18,
+          opacity: 0.6
     },
     selectedTextStyle: {
           fontSize: 16,
     },
     iconStyle: {
-          width: 20,
-          height: 20,
+          width: 25,
+          height: 25,
     },
     inputSearchStyle: {
           height: 40,

@@ -6,7 +6,7 @@ import { ScrollView } from 'react-native-gesture-handler';
 
 const Ticketpage = ({ route }) => {
   // Extract the 'data' and 'time' parameters from the route
-  const { data, time, period, name, date } = route.params;
+  const {time, period, name, date } = route.params;
   const formattedDate = format(date, 'MMMM d, yyyy');
 
   // Format the time in "hh:mm AM/PM" format
@@ -27,29 +27,29 @@ const Ticketpage = ({ route }) => {
       <View style={ticketStyle.container}>
           <Text style={ticketStyle.headingText}>Parking Receipt</Text>
         <View>
-          {data.map((seat) => (
-            <View key={seat.id}>
+          {/* {data.map((seat) => (
+            <View key={seat.id}> */}
               <View style={ticketStyle.qrContainer}>
                 <QRCode 
-                  value={`${name} ${seat.id} ${formatTime(time)} ${period} ${formattedDate}`} size={250} 
+                  value={`${name} ${formatTime(time)} ${period} ${formattedDate}`} size={250} 
                   color='#000'/>
               </View>
               <View style={ticketStyle.infocontainer}>
               <Text style={ticketStyle.mallname}>mall</Text>
               <Text style={ticketStyle.mall}>{name}</Text>
-              <Text style={ticketStyle.slotheading}>parking slot</Text>
-              <Text style={ticketStyle.slot}>{seat.id}</Text>
+              {/* <Text style={ticketStyle.slotheading}>parking slot</Text> */}
+              {/* <Text style={ticketStyle.slot}>{seat.id}</Text> */}
               <Text style={ticketStyle.timeheading}>time</Text>
               <Text style={ticketStyle.time}>{formatTime(time)}<Text> </Text>{period}</Text>
               <Text style={ticketStyle.timeheading}>date</Text>
               <Text style={ticketStyle.time}>{formattedDate}</Text>
               </View>
             </View>
-          ))}
+          {/* ))} */}
         </View>
       </View>
       <Text style={styles.alertText}>Please take a sceenshot of this Receipt :)</Text>
-    </View>
+    {/* </View> */}
     </ScrollView>
   );
 };
