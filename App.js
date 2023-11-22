@@ -10,9 +10,13 @@ import Home from './components/Home';
 import Ticketpage from './components/Ticketpage';
 import Stripe from './components/Stripe';
 import Login from './components/Login';
+import Login2 from './components/Login2';
+import Destination from './components/Destination';
+import Stadiums from './components/Stadiums';
+import Restaurants from './components/Restaurants';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
-import Login2 from './components/Login2';
+
 
 
 
@@ -55,6 +59,39 @@ function MyStack() {
         }}
       />
       <Stack.Screen name="Login2" component={Login2} 
+        options={{
+          headerTitle: () => (
+            <Image
+            source={require('./assets/logo3.png')} // Replace with the path to your logo image
+            style={{ flex:1, width: 200, height: "auto"}}
+            resizeMode="contain" // Adjust the width and height as needed
+            />
+          ),
+        }}
+      />
+      <Stack.Screen name="Destination" component={Destination} 
+        options={{
+          headerTitle: () => (
+            <Image
+            source={require('./assets/logo3.png')} // Replace with the path to your logo image
+            style={{ flex:1, width: 200, height: "auto"}}
+            resizeMode="contain" // Adjust the width and height as needed
+            />
+          ),
+        }}
+      />
+      <Stack.Screen name="Stadiums" component={Stadiums} 
+        options={{
+          headerTitle: () => (
+            <Image
+            source={require('./assets/logo3.png')} // Replace with the path to your logo image
+            style={{ flex:1, width: 200, height: "auto"}}
+            resizeMode="contain" // Adjust the width and height as needed
+            />
+          ),
+        }}
+      />
+      <Stack.Screen name="Restaurants" component={Restaurants} 
         options={{
           headerTitle: () => (
             <Image
@@ -143,7 +180,7 @@ function MyStack() {
                 color="#000"
                 size={20}
                 style={{ marginLeft: 15 }}
-                onPress={() => navigation.goBack()}
+                onPress={() => navigation.navigate('Home')}
               />
             );
           },

@@ -22,7 +22,7 @@ const Login2 = ({navigation}) => {
               <TouchableOpacity  style={[styles.slotBookercontainer]} onPress={() => navigation.goBack()}>
                 <Text style={styles.slotBookerText}>recheck email</Text>
               </TouchableOpacity>
-              <TouchableOpacity  style={[styles.slotBookercontainer]} onPress={() => navigation.navigate('Home')}>
+              <TouchableOpacity  style={[styles.slotBookercontainer]} onPress={() => navigation.navigate('Destination')}>
                 <Text style={styles.slotBookerText}>Log In</Text>
               </TouchableOpacity>
             </View>
