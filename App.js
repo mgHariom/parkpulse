@@ -7,13 +7,9 @@ import second_page from './components/second_page';
 import Chennai from './components/Chennai';
 import Bangalore from './components/Bangalore';
 import Home from './components/Home';
-import TimeToggle from './components/TimeToggle';
-import ThirdPage from './components/ThirdPage';
 import Ticketpage from './components/Ticketpage';
 import Stripe from './components/Stripe';
-//import LoginPage from './components/LoginPage';
-//import Otp from './components/Otp'
-import {AiOutlineArrowLeft} from 'react-icons/ai'
+import Login from './components/Login';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
 
@@ -32,7 +28,7 @@ const Stack = createStackNavigator();
 function MyStack() {
   return (
     <Stack.Navigator 
-    initialRouteName='Home'
+    initialRouteName='Login'
     screenOptions={{
       headerStyle: {
         backgroundColor: '#D8F0FA',
@@ -46,6 +42,16 @@ function MyStack() {
       },
     }}
     >
+      <Stack.Screen name="Login" component={Login} 
+      options={{
+        headerTitle: () => (
+          <Image
+          source={require('./assets/logo3.png')} // Replace with the path to your logo image
+          style={{ flex:1, width: 200, height: "auto"}}
+          resizeMode="contain" // Adjust the width and height as needed
+          />
+        ),
+      }}/>
     <Stack.Screen name="Home" component={Home} 
       options={{
         headerTitle: () => (
@@ -124,13 +130,13 @@ function MyStack() {
                 color="#000"
                 size={20}
                 style={{ marginLeft: 15 }}
-                onPress={() => navigation.navigate('Home')}
+                onPress={() => navigation.goBack()}
               />
             );
           },
           headerTitle: () => (
             <Image
-              source={require('./assets/logo.png')} // Replace with the path to your logo image
+              source={require('./assets/logo3.png')} // Replace with the path to your logo image
               style={{ width: 150, height: 30 }} // Adjust the width and height as needed
             />
           ),

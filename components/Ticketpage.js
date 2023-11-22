@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, Image } from 'react-native';
 import QRCode from 'react-native-qrcode-svg';
 import { startOfMonth, endOfMonth, eachDayOfInterval, format, getDate, addDays, isSameDay, getDay } from 'date-fns';
 import { ScrollView } from 'react-native-gesture-handler';
 
 const Ticketpage = ({ route }) => {
   // Extract the 'data' and 'time' parameters from the route
-  const {time, period, name, date } = route.params;
+  const {time, period, name, date, slot } = route.params;
   const formattedDate = format(date, 'MMMM d, yyyy');
 
   // Format the time in "hh:mm AM/PM" format
@@ -24,35 +24,109 @@ const Ticketpage = ({ route }) => {
   return (
     <ScrollView style={styles.scrollView}>
       <View style={styles.container}>
-      <View style={ticketStyle.container}>
-          <Text style={ticketStyle.headingText}>Parking Receipt</Text>
-        <View>
-          {/* {data.map((seat) => (
-            <View key={seat.id}> */}
-              <View style={ticketStyle.qrContainer}>
-                <QRCode 
-                  value={`${name} ${formatTime(time)} ${period} ${formattedDate}`} size={250} 
-                  color='#000'/>
-              </View>
-              <View style={ticketStyle.infocontainer}>
-              <Text style={ticketStyle.mallname}>mall</Text>
-              <Text style={ticketStyle.mall}>{name}</Text>
-              {/* <Text style={ticketStyle.slotheading}>parking slot</Text> */}
-              {/* <Text style={ticketStyle.slot}>{seat.id}</Text> */}
-              <Text style={ticketStyle.timeheading}>time</Text>
-              <Text style={ticketStyle.time}>{formatTime(time)}<Text> </Text>{period}</Text>
-              <Text style={ticketStyle.timeheading}>date</Text>
-              <Text style={ticketStyle.time}>{formattedDate}</Text>
-              </View>
-            </View>
-          {/* ))} */}
+      <View style={[mallinfo.container, mallinfo.shadowProp]}>
+        <Image source={require('./image/mall.webp')} style={mallinfo.image}/>
+        <View style={styles.textContainer}>
+          <Text style={mallinfo.mall}>{name}</Text>
+          <Text>1 Slot (P/A)</Text>
+          <Text style={mallinfo.time}>{formattedDate}</Text>
         </View>
       </View>
-      <Text style={styles.alertText}>Please take a sceenshot of this Receipt :)</Text>
-    {/* </View> */}
+      <View style={ticketStyle.container}>
+      <View style={ticketinfo.container}>
+        <View style={ticketinfo.qrContainer}>
+          <View style={ticketinfo.qr}>
+            <QRCode 
+              value={`${name} ${formatTime(time)} ${period} ${formattedDate}`} size={100} 
+              color='#000'/>
+          </View>
+          <View style={ticketinfo.textContainer}>
+            <Text style={ticketinfo.headingText}>Parking Receipt</Text>
+            <Text style={ticketinfo.slot}>{slot}</Text>
+            <Text style={ticketinfo.ticketNo}>Ticket no: 123456</Text>
+          </View>
+        </View>
+        <Text style={ticketinfo.timeText}>Entry Time | {formatTime(time)}<Text></Text>{period}</Text>
+      </View>
+        </View>
+      </View>
+      <View style={styles.alertContainer}>
+        <Text style={styles.alertText}>Please take a sceenshot of this Receipt :)</Text>
+      </View>
     </ScrollView>
   );
 };
+
+const ticketinfo = StyleSheet.create({
+  container: {
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  qrContainer: {
+    backgroundColor: '#d8f0fa',
+    alignItems: 'left',
+    flexDirection: 'row',
+    height: 170,
+    width: 320,
+    marginTop: 15,
+    padding: 15,
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  textContainer: {
+    margin: 20,
+  },
+  headingText: {
+    fontSize: 20,
+    fontWeight: '600'
+  },
+  slot: {
+    fontSize: 30,
+    fontWeight: '600'
+  },
+  ticketNo: {
+    fontSize: 20,
+    fontWeight: '300'
+  },
+  timeText: {
+    fontSize: 25,
+    marginTop: 30,
+    fontWeight: '900'
+  }
+})
+const mallinfo = StyleSheet.create({
+  container: {
+    backgroundColor: '#fff',
+    height: 180,
+    width: 350,
+    backgroundColor: '#fff',
+    borderRadius: 20, 
+    flexDirection: 'row',
+    alignItems: 'start',
+  },
+  shadowProp: {  
+    shadowOffset: {width: -2, height: 4},  
+    shadowColor: '#000',  
+    shadowOpacity: 200,  
+    shadowRadius: 3,  
+  },  
+  mall: {
+    fontSize: 30,
+    fontWeight: 'bold',
+    marginTop: 20,
+  },
+  time: {
+    fontSize: 15,
+    fontWeight: '500',
+  },
+  image: {
+    width: 100,
+    height: 100,
+    margin: 15,
+    borderRadius: 20,
+    marginTop: 20
+  }
+})
 
 const styles = StyleSheet.create({
   scrollView: {
@@ -62,24 +136,30 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#d8f0fa',
     justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
+    marginTop: 40,
   },
   alertText: {
     opacity: 0.4,
     fontSize: 18,
-    paddingTop: 18
+    paddingTop: 18,
   },
+  alertContainer: {
+    justifyContent: 'center',
+    alignItems: 'center'
+  }
 })
 
 const ticketStyle = StyleSheet.create({
   container: {
-    height: 670,
+    height: 300,
     width: 350,
     backgroundColor: '#fff',
     borderRadius: 8,
+    marginTop: 20,
   },
   headingText: {
-    fontSize: 35,
+    fontSize: 20,
     fontWeight: 'bold',
     textAlign:'center',
     color: '#000',
