@@ -37,7 +37,6 @@ const Stripe = ({ route }) => {
     }
 
     // Validate email and card details before navigating to the next screen
-    if (email === '' && cardNumber === '') {
       navigation.navigate('Ticketpage', {
         time: time,
         period: period,
@@ -45,9 +44,6 @@ const Stripe = ({ route }) => {
         date: date,
         slot: randomSlot,
       });
-    } else {
-      Alert.alert('Invalid input', 'Please enter valid email and card details.');
-    }
   };
 
   return (

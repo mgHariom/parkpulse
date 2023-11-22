@@ -12,15 +12,14 @@ const Login2 = ({navigation}) => {
                 <TextInput
                     autoCapitalize="none"
                     placeholder="password"
-                    keyboardType="password"
                     secureTextEntry={true}
                     onChangeText={(text) => setPassword(text)}
                     style={styles.input}
                 />
             </View>
             <View style={styles.slotBookerAlign}>
-            <View>
-              <TouchableOpacity  style={[styles.slotBookercontainer]} onPress={() => navigation.navigate('Home')}>
+            <View style={styles.btnContainer}>
+              <TouchableOpacity  style={[styles.slotBookercontainer]} onPress={() => navigation.goBack()}>
                 <Text style={styles.slotBookerText}>recheck email</Text>
               </TouchableOpacity>
               <TouchableOpacity  style={[styles.slotBookercontainer]} onPress={() => navigation.navigate('Home')}>
@@ -60,7 +59,7 @@ const styles = StyleSheet.create({
       },
       slotBookercontainer: {
         backgroundColor: '#264259',
-        width: 350,
+        width: 180,
         height: 61,
         justifyContent: 'center',
         alignItems: 'center',
@@ -71,5 +70,8 @@ const styles = StyleSheet.create({
         fontSize: 20,
         fontWeight: '800',
         color: '#fff',
+      },
+      btnContainer: {
+        flexDirection: 'row',
       }
 })
