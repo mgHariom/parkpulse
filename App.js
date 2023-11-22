@@ -12,6 +12,7 @@ import Stripe from './components/Stripe';
 import Login from './components/Login';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
+import Login2 from './components/Login2';
 
 
 
@@ -43,15 +44,27 @@ function MyStack() {
     }}
     >
       <Stack.Screen name="Login" component={Login} 
-      options={{
-        headerTitle: () => (
-          <Image
-          source={require('./assets/logo3.png')} // Replace with the path to your logo image
-          style={{ flex:1, width: 200, height: "auto"}}
-          resizeMode="contain" // Adjust the width and height as needed
-          />
-        ),
-      }}/>
+        options={{
+          headerTitle: () => (
+            <Image
+            source={require('./assets/logo3.png')} // Replace with the path to your logo image
+            style={{ flex:1, width: 200, height: "auto"}}
+            resizeMode="contain" // Adjust the width and height as needed
+            />
+          ),
+        }}
+      />
+      <Stack.Screen name="Login2" component={Login2} 
+        options={{
+          headerTitle: () => (
+            <Image
+            source={require('./assets/logo3.png')} // Replace with the path to your logo image
+            style={{ flex:1, width: 200, height: "auto"}}
+            resizeMode="contain" // Adjust the width and height as needed
+            />
+          ),
+        }}
+      />
     <Stack.Screen name="Home" component={Home} 
       options={{
         headerTitle: () => (

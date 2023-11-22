@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { View, Text, StyleSheet, Image, TextInput, TouchableOpacity } from "react-native";
 
-const Login = ({navigation}) => {
-    const [email, setEmail] = useState('')
+const Login2 = ({navigation}) => {
+    const [password, setPassword] = useState('')
     return(
         <View style={styles.container}>
             <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: 80}}>
@@ -11,15 +11,19 @@ const Login = ({navigation}) => {
             <View style={styles.textBox}>
                 <TextInput
                     autoCapitalize="none"
-                    placeholder="E-mail"
-                    keyboardType="email-address"
-                    onChangeText={(text) => setEmail(text)}
+                    placeholder="password"
+                    keyboardType="password"
+                    secureTextEntry={true}
+                    onChangeText={(text) => setPassword(text)}
                     style={styles.input}
                 />
             </View>
             <View style={styles.slotBookerAlign}>
             <View>
-              <TouchableOpacity  style={[styles.slotBookercontainer]} onPress={() => navigation.navigate('Login2')}>
+              <TouchableOpacity  style={[styles.slotBookercontainer]} onPress={() => navigation.navigate('Home')}>
+                <Text style={styles.slotBookerText}>recheck email</Text>
+              </TouchableOpacity>
+              <TouchableOpacity  style={[styles.slotBookercontainer]} onPress={() => navigation.navigate('Home')}>
                 <Text style={styles.slotBookerText}>Log In</Text>
               </TouchableOpacity>
             </View>
@@ -28,7 +32,7 @@ const Login = ({navigation}) => {
     )
 }
 
-export default Login;
+export default Login2;
 
 const styles = StyleSheet.create({
     container: {
