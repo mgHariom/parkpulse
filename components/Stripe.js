@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet, TextInput, Pressable, Alert, ImageBackground } from "react-native";
+import { View, Text, StyleSheet, TextInput, Pressable, Alert, ImageBackground, ScrollView } from "react-native";
 import { useNavigation } from '@react-navigation/native';
 import { useState } from "react";
 
@@ -47,7 +47,8 @@ const Stripe = ({ route }) => {
   };
 
   return (
-    <View style={styles.container}>
+    <ScrollView style = {styles.scrollView}>
+      <View style={styles.container}>
       <View style={styles.inputContainer}>
         <TextInput
           autoCapitalize="none"
@@ -65,22 +66,6 @@ const Stripe = ({ route }) => {
         />
       </View>
       <View>
-      {/* <ImageBackground
-  source={require('./image/gpay.png')}
-  style={styles.gpay}
-></ImageBackground>
-<ImageBackground
-  source={require('./image/payment/paytym.png')}
-  style={styles.paytym}
-></ImageBackground>
-<ImageBackground
-  source={require('./image/payment/cc.png')}
-  style={styles.cc}
-></ImageBackground>
-<ImageBackground
-  source={require('./image/payment/nb.png')}
-  style={styles.nb}
-></ImageBackground> */}
 <ImageBackground
   source={require('./image/payment/totalpayment.png.png')}
   style={styles.tp}
@@ -92,12 +77,16 @@ const Stripe = ({ route }) => {
       </Pressable>
       </View>
     </View>
+    </ScrollView>
   );
 };
 
 export default Stripe;
 
 const styles = StyleSheet.create({
+  scrollView: {
+    backgroundColor: '#d8f0fa'
+  },
   container: {
     flex: 1,
     justifyContent: "center",
@@ -132,17 +121,17 @@ const styles = StyleSheet.create({
     alignItems:'center',
   
 },
-tp :{
-display: 'flex',
-width: 352,
-height: 236,
-justifycontent: 'center',
-alignitems: 'center',
-marginTop:75,
-marginBottom:100,
-marginLeft:40,
-flexshrink: 0
-}
+  tp : {
+    display: 'flex',
+    width: 352,
+    height: 236,
+    justifycontent: 'center',
+    alignitems: 'center',
+    marginTop:75,
+    marginBottom:100,
+    marginLeft:40,
+    flexshrink: 0
+  }
 
 
 

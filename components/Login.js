@@ -1,10 +1,11 @@
 import { useState } from "react";
-import { View, Text, StyleSheet, Image, TextInput, TouchableOpacity } from "react-native";
+import { View, Text, StyleSheet, Image, TextInput, TouchableOpacity, ScrollView } from "react-native";
 
 const Login = ({navigation}) => {
     const [email, setEmail] = useState('')
     return(
-        <View style={styles.container}>
+        <ScrollView style = {styles.scrollView}>
+          <View style={styles.container}>
             <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: 80}}>
                 <Image source={require('./image/gif/carpark.gif')} style={{ width: 450, height: 300}} />
             </View>
@@ -24,14 +25,18 @@ const Login = ({navigation}) => {
                 <Text style={styles.slotBookerText}>Login</Text>
               </TouchableOpacity>
             </View>
+        </View> 
         </View>
-        </View>
+        </ScrollView>
     )
 }
 
 export default Login;
 
 const styles = StyleSheet.create({
+  scrollView: {
+    backgroundColor: '#d8f0fa'
+  },
     container: {
         flex: 1,
         backgroundColor: '#d8f0fa'

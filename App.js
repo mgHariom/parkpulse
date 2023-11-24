@@ -115,15 +115,26 @@ function MyStack() {
         }}
       />
     <Stack.Screen name="Home" component={Home} 
-      options={{
-        headerTitle: () => (
-          <Image
-          source={require('./assets/logo3.png')} // Replace with the path to your logo image
-          style={{ flex:1, width: 200, height: "auto"}}
-          resizeMode="contain" // Adjust the width and height as needed
+     options={ {
+      headerLeft: () => {
+        const navigation = useNavigation();
+        return (
+          <MaterialCommunityIcons
+            name="arrow-left"
+            color="#000"
+            size={20}
+            style={{ marginLeft: 15 }}
+            onPress={() => navigation.navigate('Destination')}
           />
-        ),
-      }}
+        );
+      },
+      headerTitle: () => (
+        <Image
+          source={require('./assets/logo3.png')} // Replace with the path to your logo image
+          style={{ width: 150, height: 30 }} // Adjust the width and height as needed
+        />
+      ),
+    }}
     />
     <Stack.Screen name="Map" component={Map} 
       options={{
