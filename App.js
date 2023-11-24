@@ -14,6 +14,7 @@ import Login2 from './components/Login2';
 import Destination from './components/Destination';
 import Stadiums from './components/Stadiums';
 import Restaurants from './components/Restaurants';
+import Map from './components/Map';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
 
@@ -70,12 +71,23 @@ function MyStack() {
         }}
       />
       <Stack.Screen name="Destination" component={Destination} 
-        options={{
+        options={ {
+          headerLeft: () => {
+            const navigation = useNavigation();
+            return (
+              <MaterialCommunityIcons
+                name="arrow-left"
+                color="#d8f0fa"
+                size={20}
+                style={{ marginLeft: 15 }}
+                onPress={() => navigation.navigate('Home')}
+              />
+            );
+          },
           headerTitle: () => (
             <Image
-            source={require('./assets/logo3.png')} // Replace with the path to your logo image
-            style={{ flex:1, width: 200, height: "auto"}}
-            resizeMode="contain" // Adjust the width and height as needed
+              source={require('./assets/logo3.png')} // Replace with the path to your logo image
+              style={{ width: 150, height: 30 }} // Adjust the width and height as needed
             />
           ),
         }}
@@ -111,7 +123,19 @@ function MyStack() {
           resizeMode="contain" // Adjust the width and height as needed
           />
         ),
-      }}/>
+      }}
+    />
+    <Stack.Screen name="Map" component={Map} 
+      options={{
+        headerTitle: () => (
+          <Image
+          source={require('./assets/logo3.png')} // Replace with the path to your logo image
+          style={{ flex:1, width: 200, height: "auto"}}
+          resizeMode="contain" // Adjust the width and height as needed
+          />
+        ),
+      }}
+    />
     <Stack.Screen name="Coimbatore" component={Coimbatore}
       options={{
         headerTitle: () => (
@@ -177,7 +201,7 @@ function MyStack() {
             return (
               <MaterialCommunityIcons
                 name="arrow-left"
-                color="#000"
+                color="#d8f0fa"
                 size={20}
                 style={{ marginLeft: 15 }}
                 onPress={() => navigation.navigate('Home')}

@@ -6,8 +6,9 @@ const Login = ({navigation}) => {
     return(
         <View style={styles.container}>
             <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: 80}}>
-                <Image source={require('./image/gif/gif2.gif')} style={{ width: 450, height: 300}} />
+                <Image source={require('./image/gif/carpark.gif')} style={{ width: 450, height: 300}} />
             </View>
+            <Text style={styles.inputHeader}>Enter Your Gmail :</Text>
             <View style={styles.textBox}>
                 <TextInput
                     autoCapitalize="none"
@@ -20,7 +21,7 @@ const Login = ({navigation}) => {
             <View style={styles.slotBookerAlign}>
             <View>
               <TouchableOpacity  style={[styles.slotBookercontainer]} onPress={() => navigation.navigate('Login2')}>
-                <Text style={styles.slotBookerText}>Log In</Text>
+                <Text style={styles.slotBookerText}>Login</Text>
               </TouchableOpacity>
             </View>
         </View>
@@ -67,5 +68,11 @@ const styles = StyleSheet.create({
         fontSize: 20,
         fontWeight: '800',
         color: '#fff',
+      },
+      inputHeader: {
+        fontSize: 24,
+        marginLeft: 30,
+        marginTop: 30,
+        fontWeight: '800'
       }
 })

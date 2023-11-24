@@ -4,28 +4,28 @@ export default function Restaurants ({navigation, route}){
     return(
         <ScrollView style = {styles.scrollView}>
           <View style = {styles.container_img}>
-            <TouchableOpacity onPress={() => navigation.navigate('SecondPage', { name: 'vivanta by taj' })}>
+            <TouchableOpacity onPress={() => navigation.navigate('Map', { name: 'vivanta by taj' })}>
                 <Image 
                     source={require('./image/restaurants/taj.jpg')}
                     style={styles.img}    
                 ></Image>
             </TouchableOpacity>
 
-            <TouchableOpacity onPress={() => navigation.navigate('SecondPage', { name: 'annapoorna' })}>
+            <TouchableOpacity onPress={() => navigation.navigate('Map', { name: 'Annapoorna' })}>
                 <Image 
                     source={require('./image/restaurants/annapoorna.jpg')}
                     style={styles.img}  
                 />
             </TouchableOpacity> 
 
-            <TouchableOpacity onPress={() => navigation.navigate('SecondPage', { name: 'residency' })}>
+            <TouchableOpacity onPress={() => navigation.navigate('Map', { name: 'Residency' })}>
                 <Image 
                     source={require('./image/restaurants/residency.jpg')}
                     style={styles.img}   
                 />
             </TouchableOpacity>
 
-            <TouchableOpacity onPress={() => navigation.navigate('SecondPage', { name: 'anandhaas' })}>
+            <TouchableOpacity onPress={() => navigation.navigate('Map', { name: 'anandhaas' })}>
                 <Image 
                     source={require('./image/restaurants/anandhas.jpg')}
                     style={styles.img}   

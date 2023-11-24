@@ -6,7 +6,7 @@ const Login2 = ({navigation}) => {
     return(
         <View style={styles.container}>
             <View style={{ justifyContent: 'center', alignItems: 'center', marginTop: 80}}>
-                <Image source={require('./image/gif/gif2.gif')} style={{ width: 450, height: 300}} />
+                <Image source={require('./image/gif/carpark.gif')} style={{ width: 450, height: 300}} />
             </View>
             <View style={styles.textBox}>
                 <TextInput
@@ -20,10 +20,10 @@ const Login2 = ({navigation}) => {
             <View style={styles.slotBookerAlign}>
             <View style={styles.btnContainer}>
               <TouchableOpacity  style={[styles.slotBookercontainer]} onPress={() => navigation.goBack()}>
-                <Text style={styles.slotBookerText}>recheck email</Text>
+                <Text style={styles.slotBookerText}>Recheck Email</Text>
               </TouchableOpacity>
               <TouchableOpacity  style={[styles.slotBookercontainer]} onPress={() => navigation.navigate('Destination')}>
-                <Text style={styles.slotBookerText}>Log In</Text>
+                <Text style={styles.slotBookerText}>Get Started</Text>
               </TouchableOpacity>
             </View>
         </View>
@@ -72,6 +72,6 @@ const styles = StyleSheet.create({
         color: '#fff',
       },
       btnContainer: {
-        flexDirection: 'row',
+        flexDirection: 'row'
       }
 })

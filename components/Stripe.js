@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet, TextInput, Button, Alert } from "react-native";
+import { View, Text, StyleSheet, TextInput, Pressable, Alert, ImageBackground } from "react-native";
 import { useNavigation } from '@react-navigation/native';
 import { useState } from "react";
 
@@ -48,21 +48,49 @@ const Stripe = ({ route }) => {
 
   return (
     <View style={styles.container}>
-      <TextInput
-        autoCapitalize="none"
-        placeholder="E-mail"
-        keyboardType="email-address"
-        onChangeText={(text) => setEmail(text)}
-        style={styles.input}
-      />
-      <TextInput
-        autoCapitalize="none"
-        placeholder="4242 4242 4242 4242"
-        keyboardType="number-pad"
-        onChangeText={(text) => setCardNumber(text)}
-        style={styles.input}
-      />
-      <Button title="Pay" onPress={handlePayPress} />
+      <View style={styles.inputContainer}>
+        <TextInput
+          autoCapitalize="none"
+          placeholder="E-mail"
+          keyboardType="email-address"
+          onChangeText={(text) => setEmail(text)}
+          style={styles.input}
+        />
+        <TextInput
+          autoCapitalize="none"
+          placeholder="4242 4242 4242 4242"
+          keyboardType="number-pad"
+          onChangeText={(text) => setCardNumber(text)}
+          style={styles.input}
+        />
+      </View>
+      <View>
+      {/* <ImageBackground
+  source={require('./image/gpay.png')}
+  style={styles.gpay}
+></ImageBackground>
+<ImageBackground
+  source={require('./image/payment/paytym.png')}
+  style={styles.paytym}
+></ImageBackground>
+<ImageBackground
+  source={require('./image/payment/cc.png')}
+  style={styles.cc}
+></ImageBackground>
+<ImageBackground
+  source={require('./image/payment/nb.png')}
+  style={styles.nb}
+></ImageBackground> */}
+<ImageBackground
+  source={require('./image/payment/totalpayment.png.png')}
+  style={styles.tp}
+></ImageBackground>
+      </View>
+      <View style= {styles.btnContainers}>
+      <Pressable onPress={handlePayPress}  style={styles.btn}>
+        <Text style={styles.btnContainer}>Pay</Text>
+      </Pressable>
+      </View>
     </View>
   );
 };
@@ -73,21 +101,49 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: "center",
-    margin: 20,
+    backgroundColor: '#d8f0fa',
+  },
+  inputContainer: {
+    margin: 5,
   },
   input: {
-    backgroundColor: "#efefefef",
-
     borderRadius: 8,
     fontSize: 20,
     height: 50,
     padding: 10,
+    backgroundColor: '#fff',
+    marginTop: 20
   },
-  card: {
-    backgroundColor: "#efefefef",
+  btn: {
+    width: 230,
+    height: 60,
+    backgroundColor: '#264259',
+    borderRadius: 30,
+    justifyContent: 'center',
+    alignItems: 'center'
   },
-  cardContainer: {
-    height: 50,
-    marginVertical: 30,
+  btnContainer: {
+    fontSize: 27,
+    fontWeight: '600',
+    color: '#fff'
   },
-});
+  btnContainers : {
+    justifyContent : 'flex-end',
+    alignItems:'center',
+  
+},
+tp :{
+display: 'flex',
+width: 352,
+height: 236,
+justifycontent: 'center',
+alignitems: 'center',
+marginTop:75,
+marginBottom:100,
+marginLeft:40,
+flexshrink: 0
+}
+
+
+
+})

@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, Image } from 'react-native';
+import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
 import QRCode from 'react-native-qrcode-svg';
 import { startOfMonth, endOfMonth, eachDayOfInterval, format, getDate, addDays, isSameDay, getDay } from 'date-fns';
 import { ScrollView } from 'react-native-gesture-handler';
 
-const Ticketpage = ({ route }) => {
+const Ticketpage = ({ route, navigation }) => {
   // Extract the 'data' and 'time' parameters from the route
   const {time, period, name, date, slot } = route.params;
   const formattedDate = format(date, 'MMMM d, yyyy');
@@ -42,16 +42,27 @@ const Ticketpage = ({ route }) => {
           </View>
           <View style={ticketinfo.textContainer}>
             <Text style={ticketinfo.headingText}>Parking Receipt</Text>
-            <Text style={ticketinfo.slot}>{slot}</Text>
+            <Text style={ticketinfo.slot}>Slot : {slot}</Text>
             <Text style={ticketinfo.ticketNo}>Ticket no: 123456</Text>
           </View>
         </View>
-        <Text style={ticketinfo.timeText}>Entry Time | {formatTime(time)}<Text></Text>{period}</Text>
-      </View>
+        <View style={styles.alertContainer}>
+          <Text style={styles.alertText}>Please take a sceenshot of this Receipt :)</Text>
+        </View>
+        <Text style={ticketinfo.timeText}>Entry Time | {formatTime(time)}<Text> </Text>{period}</Text>
+        <View style={styles.priceContainer}>
+          <Text style={styles.priceText}>Basic Fee : ₹ 40</Text>
         </View>
       </View>
-      <View style={styles.alertContainer}>
-        <Text style={styles.alertText}>Please take a sceenshot of this Receipt :)</Text>
+        </View>
+        <View style={styles.btnContainer}>
+              <TouchableOpacity  style={[styles.slotBookercontainer]} onPress={() => navigation.navigate('Destination')}>
+                <Text style={styles.slotBookerText}>Cancel</Text>
+              </TouchableOpacity>
+              <TouchableOpacity  style={[styles.slotBookercontainer]} onPress={() => navigation.navigate('Destination')}>
+                <Text style={styles.slotBookerText}>Done</Text>
+              </TouchableOpacity>
+        </View>
       </View>
     </ScrollView>
   );
@@ -71,7 +82,8 @@ const ticketinfo = StyleSheet.create({
     marginTop: 15,
     padding: 15,
     justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
+    borderRadius: 15
   },
   textContainer: {
     margin: 20,
@@ -90,7 +102,7 @@ const ticketinfo = StyleSheet.create({
   },
   timeText: {
     fontSize: 25,
-    marginTop: 30,
+    marginTop: 80,
     fontWeight: '900'
   }
 })
@@ -147,15 +159,53 @@ const styles = StyleSheet.create({
   alertContainer: {
     justifyContent: 'center',
     alignItems: 'center'
+  },
+  priceContainer: {
+    width: 320,
+    height: 50,
+    backgroundColor: '#d8f0fa',
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 10,
+    marginTop: 70
+  },
+  priceText: {
+    fontSize: 20,
+    fontWeight: '600'
+  },
+  slotBookerAlign: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    margin: 20
+  },
+  slotBookercontainer: {
+    backgroundColor: '#264259',
+    width: 180,
+    height: 61,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 50,
+    marginTop: 20,
+    marginLeft: 10,
+    marginRight: 10
+  },
+  slotBookerText: {
+    fontSize: 20,
+    fontWeight: '800',
+    color: '#fff',
+  },
+  btnContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between'
   }
 })
 
 const ticketStyle = StyleSheet.create({
   container: {
-    height: 300,
+    height: 480,
     width: 350,
     backgroundColor: '#fff',
-    borderRadius: 8,
+    borderRadius: 20,
     marginTop: 20,
   },
   headingText: {
@@ -170,7 +220,7 @@ const ticketStyle = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     padding: 30,
-    borderRadius: 10,
+    borderRadius: 50,
   },
 
   infocontainer: {
